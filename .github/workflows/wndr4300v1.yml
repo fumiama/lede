@@ -12,7 +12,7 @@ name: wndr4300_v1_128m
 on:
   push:
     branches: 
-      - master
+      - main
   # schedule:
   #   - cron: 0 20 * * *
   release:
