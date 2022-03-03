@@ -73,7 +73,7 @@ jobs:
 
       - name: Generate configuration file
         run: |
-          cp .config.newifi3 .config
+          cp custdevcfg/.config.newifi3 .config
 
       - name: Make download
         run: |

@@ -73,7 +73,7 @@ jobs:
 
       - name: Generate configuration file
         run: |
-          cp .config.wndr4300 .config
+          cp custdevcfg/.config.wndr4300 .config
 
       - name: Make download
         run: |
