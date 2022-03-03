@@ -5,7 +5,6 @@
 /dl
 /.config
 /.config.old
-/.config.*
 /bin
 /build_dir
 /staging_dir
@@ -17,9 +16,6 @@
 /overlay
 /package/feeds
 /package/openwrt-packages
-/package/fumiama
-/package/passwall
-/package/useful
 key-build*
 *.orig
 *.rej
