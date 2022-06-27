@@ -9,9 +9,9 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=openssl
 PKG_BASE:=1.1.1
-PKG_BUGFIX:=m
+PKG_BUGFIX:=p
 PKG_VERSION:=$(PKG_BASE)$(PKG_BUGFIX)
-PKG_RELEASE:=3
+PKG_RELEASE:=$(AUTORELEASE)
 PKG_USE_MIPS16:=0
 
 PKG_BUILD_PARALLEL:=1
@@ -27,7 +27,7 @@ PKG_SOURCE_URL:= \
 	ftp://ftp.pca.dfn.de/pub/tools/net/openssl/source/ \
 	ftp://ftp.pca.dfn.de/pub/tools/net/openssl/source/old/$(PKG_BASE)/
 
-PKG_HASH:=f89199be8b23ca45fc7cb9f1d8d3ee67312318286ad030f5316aca6462db6c96
+PKG_HASH:=bf61b62aaa66c7c7639942a94de4c9ae8280c08f17d4eac2e44644d9fc8ace6f
 
 PKG_LICENSE:=OpenSSL
 PKG_LICENSE_FILES:=LICENSE
@@ -66,7 +66,7 @@ PKG_CONFIG_DEPENDS:= \
 	CONFIG_OPENSSL_WITH_WHIRLPOOL
 
 include $(INCLUDE_DIR)/package.mk
-include engine.mk
+include $(INCLUDE_DIR)/openssl-engine.mk
 
 ifneq ($(CONFIG_CCACHE),)
 HOSTCC=$(HOSTCC_NOCACHE)
