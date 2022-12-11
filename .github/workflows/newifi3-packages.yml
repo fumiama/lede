@@ -89,9 +89,11 @@ jobs:
 
       - name: Compile cutsom packages
         run: |
-          make package/fumiama/cmoe/compile V=s
+          make -j$(nproc) tools/install
+          make -j$(nproc) toolchain/install
           make package/fumiama/libscrypto/compile V=s
           make package/fumiama/libspb/compile V=s
+          make package/fumiama/cmoe/compile V=s
           make package/fumiama/shttps/compile V=s
           make package/fumiama/simple-dict-server/compile V=s
           make package/fumiama/simple-kanban-server/compile V=s
