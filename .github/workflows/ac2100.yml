@@ -35,6 +35,11 @@ jobs:
         with:
           ref: main
 
+      - name: cache
+        uses: klever1988/cachewrtbuild@main
+        with:
+          ccache: 'true'
+
       - name: Space cleanup
         env:
           DEBIAN_FRONTEND: noninteractive
