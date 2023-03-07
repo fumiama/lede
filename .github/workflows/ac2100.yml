@@ -33,7 +33,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
         with:
-          ref: master
+          ref: main
 
       - name: Space cleanup
         env:
