@@ -1,6 +1,6 @@
 DTS_DIR := $(DTS_DIR)/mediatek
 
-KERNEL_LOADADDR := 0x48000000
+KERNEL_LOADADDR := 0x44000000
 
 define Image/Prepare
 	# For UBI we want only one extra block
@@ -36,20 +36,6 @@ define Build/mt7986-gpt
 		)
 	cat $@.tmp >> $@
 	rm $@.tmp
-endef
-
-define Build/gen-ubi-initramfs
-       sh $(TOPDIR)/scripts/ubinize-image.sh \
-               $(if $(UBOOTENV_IN_UBI),--uboot-env) \
-               --kernel $(KDIR)/tmp/$(KERNEL_INITRAMFS_IMAGE) \
-               $(foreach part,$(UBINIZE_PARTS),--part $(part)) \
-               "$(1).tmp" \
-               -p $(BLOCKSIZE:%k=%KiB) -m $(PAGESIZE) \
-               $(if $(SUBPAGESIZE),-s $(SUBPAGESIZE)) \
-               $(if $(VID_HDR_OFFSET),-O $(VID_HDR_OFFSET)) \
-               $(UBINIZE_OPTS) && \
-       cat "$(1).tmp" > "$(1)" && rm "$(1).tmp" && \
-       $(CP) "$(1)" $(BIN_DIR)/
 endef
 
 define Device/bananapi_bpi-r3
@@ -138,18 +124,43 @@ define Device/mediatek_mt7986b-rfb
 endef
 TARGET_DEVICES += mediatek_mt7986b-rfb
 
+define Device/tplink_tl-common
+  DEVICE_VENDOR := TP-Link
+  DEVICE_DTS_DIR := ../dts
+  KERNEL_LOADADDR := 0x48000000
+  UBINIZE_OPTS := -E 5
+  BLOCKSIZE := 128k
+  PAGESIZE := 2048
+  KERNEL_IN_UBI := 1
+  DEVICE_PACKAGES := kmod-usb3
+  IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
+endef
+
+define Device/tplink_tl-xdr6086
+  DEVICE_MODEL := TL-XDR6086
+  DEVICE_DTS := mt7986a-tl-xdr6086
+  $(call Device/tplink_tl-common)
+endef
+TARGET_DEVICES += tplink_tl-xdr6086
+
+define Device/tplink_tl-xdr6088
+  DEVICE_MODEL := TL-XDR6088
+  DEVICE_DTS := mt7986a-tl-xdr6088
+  $(call Device/tplink_tl-common)
+endef
+TARGET_DEVICES += tplink_tl-xdr6088
+
 define Device/xiaomi_redmi-router-ax6000
   DEVICE_VENDOR := Xiaomi
   DEVICE_MODEL := Redmi Router AX6000
   DEVICE_DTS := mt7986a-xiaomi-redmi-router-ax6000
   DEVICE_DTS_DIR := ../dts
+  DEVICE_PACKAGES := kmod-leds-ws2812b
+  KERNEL_LOADADDR := 0x48000000
   UBINIZE_OPTS := -E 5
   BLOCKSIZE := 128k
   PAGESIZE := 2048
   KERNEL_IN_UBI := 1
-  KERNEL_INITRAMFS := kernel-bin | lzma | \
-       fit lzma $$(KDIR)/image-$$(firstword $$(DEVICE_DTS)).dtb with-initrd | \
-       gen-ubi-initramfs $(KDIR)/tmp/$$(KERNEL_INITRAMFS_PREFIX)-factory.ubi
   IMAGE/sysupgrade.bin := sysupgrade-tar | append-metadata
 endef
 TARGET_DEVICES += xiaomi_redmi-router-ax6000

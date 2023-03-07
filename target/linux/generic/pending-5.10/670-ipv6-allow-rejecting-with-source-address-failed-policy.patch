@@ -53,7 +53,7 @@ Signed-off-by: Jonas Gorski <jogo@openwrt.org>
  
 --- a/net/ipv4/fib_semantics.c
 +++ b/net/ipv4/fib_semantics.c
-@@ -142,6 +142,10 @@ const struct fib_prop fib_props[RTN_MAX
+@@ -143,6 +143,10 @@ const struct fib_prop fib_props[RTN_MAX
  		.error	= -EINVAL,
  		.scope	= RT_SCOPE_NOWHERE,
  	},
@@ -66,7 +66,7 @@ Signed-off-by: Jonas Gorski <jogo@openwrt.org>
  static void rt_fibinfo_free(struct rtable __rcu **rtp)
 --- a/net/ipv4/fib_trie.c
 +++ b/net/ipv4/fib_trie.c
-@@ -2734,6 +2734,7 @@ static const char *const rtn_type_names[
+@@ -2736,6 +2736,7 @@ static const char *const rtn_type_names[
  	[RTN_THROW] = "THROW",
  	[RTN_NAT] = "NAT",
  	[RTN_XRESOLVE] = "XRESOLVE",

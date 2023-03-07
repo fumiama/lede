@@ -2,6 +2,16 @@
 #
 # Copyright (C) 2020 Tobias Maedel
 
+define Device/ariaboard_photonicat
+  DEVICE_VENDOR := Ariaboard
+  DEVICE_MODEL := Photonicat
+  SOC := rk3568
+  UBOOT_DEVICE_NAME := photonicat-rk3568
+  IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r5s | pine64-img | gzip | append-metadata
+  DEVICE_PACKAGES := ar3k-firmware pcat-manager
+endef
+TARGET_DEVICES += ariaboard_photonicat
+
 define Device/ezpro_mrkaio-m68s
   DEVICE_VENDOR := EZPRO
   DEVICE_MODEL := Mrkaio M68S
@@ -12,13 +22,23 @@ define Device/ezpro_mrkaio-m68s
 endef
 TARGET_DEVICES += ezpro_mrkaio-m68s
 
-define Device/hinlink_opc-h68k
+define Device/hinlink_common
   DEVICE_VENDOR := HINLINK
-  DEVICE_MODEL := OPC-H68K
   SOC := rk3568
   UBOOT_DEVICE_NAME := opc-h68k-rk3568
   IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r5s | pine64-img | gzip | append-metadata
-  DEVICE_PACKAGES := kmod-ata-ahci-platform kmod-mt7921e kmod-r8125
+  DEVICE_PACKAGES := kmod-ata-ahci-platform kmod-mt7921e kmod-r8125 kmod-usb-serial-cp210x wpad-openssl
+endef
+
+define Device/hinlink_opc-h66k
+$(call Device/hinlink_common)
+  DEVICE_MODEL := OPC-H66K
+endef
+TARGET_DEVICES += hinlink_opc-h66k
+
+define Device/hinlink_opc-h68k
+$(call Device/hinlink_common)
+  DEVICE_MODEL := OPC-H68K
 endef
 TARGET_DEVICES += hinlink_opc-h68k
 
@@ -121,6 +141,16 @@ define Device/pine64_rockpro64
 endef
 TARGET_DEVICES += pine64_rockpro64
 
+define Device/radxa_e25
+  DEVICE_VENDOR := Radxa
+  DEVICE_MODEL := E25
+  DEVICE_DTS := rockchip/rk3568-radxa-e25
+  UBOOT_DEVICE_NAME := radxa-e25-rk3568
+  IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r5s | pine64-img | gzip | append-metadata
+  DEVICE_PACKAGES := kmod-ata-ahci-platform kmod-r8125
+endef
+TARGET_DEVICES += radxa_e25
+
 define Device/radxa_rock-3a
   DEVICE_VENDOR := Radxa
   DEVICE_MODEL := ROCK3 A
@@ -142,26 +172,26 @@ define Device/radxa_rock-pi-4
 endef
 TARGET_DEVICES += radxa_rock-pi-4
 
-define Device/radxa_rock-pi-e25
-  DEVICE_VENDOR := Radxa
-  DEVICE_MODEL := ROCK Pi E25
-  SOC := rk3568
-  SUPPORTED_DEVICES := radxa,rockpi-e25
-  UBOOT_DEVICE_NAME := rock-pi-e25-rk3568
-  IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r5s | pine64-img | gzip | append-metadata
-  DEVICE_PACKAGES := kmod-r8125
-endef
-TARGET_DEVICES += radxa_rock-pi-e25
-
 define Device/rongpin_king3399
   DEVICE_VENDOR := Rongpin
   DEVICE_MODEL := King3399
   SOC := rk3399
   UBOOT_DEVICE_NAME := rongpin-king3399-rk3399
   IMAGE/sysupgrade.img.gz := boot-common | boot-script nanopi-r4s | pine64-bin | gzip | append-metadata
-  DEVICE_PACKAGES := kmod-r8168 -urngd
+  DEVICE_PACKAGES := kmod-r8168 -urngd kmod-brcmfmac cypress-firmware-4356-sdio rongpin-king3399-firmware wpad-openssl
 endef
 TARGET_DEVICES += rongpin_king3399
+
+define Device/rocktech_mpc1903
+  DEVICE_VENDOR := Rocktech
+  DEVICE_MODEL := MPC1903
+  SOC := rk3399
+  SUPPORTED_DEVICES := rocktech,mpc1903
+  UBOOT_DEVICE_NAME := rocktech-mpc1903-rk3399
+  IMAGE/sysupgrade.img.gz := boot-common | boot-script | pine64-bin | gzip | append-metadata
+  DEVICE_PACKAGES := kmod-usb-net-smsc75xx kmod-usb-serial-cp210x -urngd
+endef
+TARGET_DEVICES += rocktech_mpc1903
 
 define Device/sharevdi_guangmiao-g4c
   DEVICE_VENDOR := SHAREVDI
