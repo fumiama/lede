@@ -291,8 +291,16 @@ CONFIG_ARCH="mipsel"
 #
 # Target Images
 #
-# CONFIG_TARGET_ROOTFS_INITRAMFS is not set
+CONFIG_TARGET_ROOTFS_INITRAMFS=y
+# CONFIG_TARGET_INITRAMFS_COMPRESSION_NONE is not set
+# CONFIG_TARGET_INITRAMFS_COMPRESSION_GZIP is not set
+# CONFIG_TARGET_INITRAMFS_COMPRESSION_BZIP2 is not set
+CONFIG_TARGET_INITRAMFS_COMPRESSION_LZMA=y
+# CONFIG_TARGET_INITRAMFS_COMPRESSION_LZO is not set
+# CONFIG_TARGET_INITRAMFS_COMPRESSION_LZ4 is not set
+# CONFIG_TARGET_INITRAMFS_COMPRESSION_XZ is not set
 CONFIG_EXTERNAL_CPIO=""
+# CONFIG_TARGET_INITRAMFS_FORCE is not set
 
 #
 # Root filesystem archives
@@ -305,7 +313,7 @@ CONFIG_EXTERNAL_CPIO=""
 #
 # CONFIG_TARGET_ROOTFS_EXT4FS is not set
 CONFIG_TARGET_ROOTFS_SQUASHFS=y
-CONFIG_TARGET_SQUASHFS_BLOCK_SIZE=256
+CONFIG_TARGET_SQUASHFS_BLOCK_SIZE=1024
 CONFIG_TARGET_UBIFS_FREE_SPACE_FIXUP=y
 CONFIG_TARGET_UBIFS_JOURNAL_SIZE=""
 
@@ -322,13 +330,13 @@ CONFIG_TARGET_ROOTFS_PARTSIZE=160
 #
 # Global build settings
 #
-# CONFIG_JSON_OVERVIEW_IMAGE_INFO is not set
+CONFIG_JSON_OVERVIEW_IMAGE_INFO=y
 # CONFIG_ALL_NONSHARED is not set
 # CONFIG_ALL_KMODS is not set
 # CONFIG_ALL is not set
 # CONFIG_BUILDBOT is not set
 CONFIG_SIGNED_PACKAGES=y
-# CONFIG_SIGNATURE_CHECK is not set
+CONFIG_SIGNATURE_CHECK=y
 CONFIG_DOWNLOAD_CHECK_CERTIFICATE=y
 
 #
@@ -349,11 +357,11 @@ CONFIG_SHADOW_PASSWORDS=y
 # Kernel build options
 #
 CONFIG_KERNEL_BUILD_USER="fumiama"
-CONFIG_KERNEL_BUILD_DOMAIN="nanami"
+CONFIG_KERNEL_BUILD_DOMAIN="sakura"
 # CONFIG_KERNEL_PRINTK is not set
 # CONFIG_KERNEL_SWAP is not set
 # CONFIG_KERNEL_PROC_STRIPPED is not set
-CONFIG_KERNEL_DEBUG_FS=y
+# CONFIG_KERNEL_DEBUG_FS is not set
 # CONFIG_KERNEL_PERF_EVENTS is not set
 # CONFIG_KERNEL_PROFILING is not set
 # CONFIG_KERNEL_UBSAN is not set
@@ -385,13 +393,42 @@ CONFIG_KERNEL_FANOTIFY=y
 # CONFIG_KERNEL_KEXEC is not set
 # CONFIG_USE_RFKILL is not set
 # CONFIG_USE_SPARSE is not set
-CONFIG_KERNEL_DEVTMPFS=y
-# CONFIG_KERNEL_DEVTMPFS_MOUNT is not set
+# CONFIG_KERNEL_DEVTMPFS is not set
 CONFIG_KERNEL_KEYS=y
 # CONFIG_KERNEL_PERSISTENT_KEYRINGS is not set
 # CONFIG_KERNEL_KEYS_REQUEST_CACHE is not set
 # CONFIG_KERNEL_BIG_KEYS is not set
-# CONFIG_KERNEL_CGROUPS is not set
+CONFIG_KERNEL_CGROUPS=y
+# CONFIG_KERNEL_CGROUP_DEBUG is not set
+CONFIG_KERNEL_FREEZER=y
+# CONFIG_KERNEL_CGROUP_FREEZER is not set
+# CONFIG_KERNEL_CGROUP_DEVICE is not set
+# CONFIG_KERNEL_CGROUP_HUGETLB is not set
+CONFIG_KERNEL_CGROUP_PIDS=y
+CONFIG_KERNEL_CGROUP_RDMA=y
+CONFIG_KERNEL_CGROUP_BPF=y
+CONFIG_KERNEL_CPUSETS=y
+# CONFIG_KERNEL_PROC_PID_CPUSET is not set
+CONFIG_KERNEL_CGROUP_CPUACCT=y
+CONFIG_KERNEL_RESOURCE_COUNTERS=y
+CONFIG_KERNEL_MM_OWNER=y
+CONFIG_KERNEL_MEMCG=y
+CONFIG_KERNEL_MEMCG_SWAP=y
+# CONFIG_KERNEL_MEMCG_SWAP_ENABLED is not set
+CONFIG_KERNEL_MEMCG_KMEM=y
+# CONFIG_KERNEL_CGROUP_PERF is not set
+CONFIG_KERNEL_CGROUP_SCHED=y
+CONFIG_KERNEL_FAIR_GROUP_SCHED=y
+CONFIG_KERNEL_CFS_BANDWIDTH=y
+CONFIG_KERNEL_RT_GROUP_SCHED=y
+CONFIG_KERNEL_BLK_CGROUP=y
+# CONFIG_KERNEL_CFQ_GROUP_IOSCHED is not set
+CONFIG_KERNEL_BLK_DEV_THROTTLING=y
+# CONFIG_KERNEL_BLK_DEV_THROTTLING_LOW is not set
+# CONFIG_KERNEL_DEBUG_BLK_CGROUP is not set
+# CONFIG_KERNEL_NET_CLS_CGROUP is not set
+# CONFIG_KERNEL_CGROUP_NET_CLASSID is not set
+# CONFIG_KERNEL_CGROUP_NET_PRIO is not set
 CONFIG_KERNEL_NAMESPACES=y
 CONFIG_KERNEL_UTS_NS=y
 CONFIG_KERNEL_IPC_NS=y
@@ -475,7 +512,7 @@ CONFIG_SSTRIP_ARGS="-z"
 #
 # Hardening build options
 #
-# CONFIG_PKG_CHECK_FORMAT_SECURITY is not set
+CONFIG_PKG_CHECK_FORMAT_SECURITY=y
 # CONFIG_PKG_ASLR_PIE_NONE is not set
 CONFIG_PKG_ASLR_PIE_REGULAR=y
 # CONFIG_PKG_ASLR_PIE_ALL is not set
@@ -570,7 +607,7 @@ CONFIG_FEED_telephony=y
 # CONFIG_PACKAGE_attendedsysupgrade-common is not set
 # CONFIG_PACKAGE_auc is not set
 CONFIG_PACKAGE_base-files=y
-# CONFIG_PACKAGE_block-mount is not set
+CONFIG_PACKAGE_block-mount=y
 # CONFIG_PACKAGE_blockd is not set
 # CONFIG_PACKAGE_bridge is not set
 CONFIG_PACKAGE_busybox=y
@@ -1659,18 +1696,18 @@ CONFIG_BUSYBOX_DEFAULT_FEATURE_IPC_SYSLOG_BUFFER_SIZE=0
 # CONFIG_BUSYBOX_CONFIG_FEATURE_IP_LINK is not set
 # CONFIG_PACKAGE_busybox-selinux is not set
 CONFIG_PACKAGE_ca-bundle=y
-# CONFIG_PACKAGE_ca-certificates is not set
+CONFIG_PACKAGE_ca-certificates=y
 # CONFIG_PACKAGE_dnsmasq is not set
 # CONFIG_PACKAGE_dnsmasq-dhcpv6 is not set
 CONFIG_PACKAGE_dnsmasq-full=y
 CONFIG_PACKAGE_dnsmasq_full_dhcp=y
 CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
-CONFIG_PACKAGE_dnsmasq_full_dnssec=y
-CONFIG_PACKAGE_dnsmasq_full_auth=y
+# CONFIG_PACKAGE_dnsmasq_full_dnssec is not set
+# CONFIG_PACKAGE_dnsmasq_full_auth is not set
 CONFIG_PACKAGE_dnsmasq_full_ipset=y
 # CONFIG_PACKAGE_dnsmasq_full_nftset is not set
-CONFIG_PACKAGE_dnsmasq_full_conntrack=y
-CONFIG_PACKAGE_dnsmasq_full_noid=y
+# CONFIG_PACKAGE_dnsmasq_full_conntrack is not set
+# CONFIG_PACKAGE_dnsmasq_full_noid is not set
 # CONFIG_PACKAGE_dnsmasq_full_broken_rtc is not set
 CONFIG_PACKAGE_dnsmasq_full_tftp=y
 CONFIG_PACKAGE_dropbear=y
@@ -1704,7 +1741,7 @@ CONFIG_PACKAGE_libgcc=y
 # CONFIG_PACKAGE_libgomp is not set
 CONFIG_PACKAGE_libpthread=y
 CONFIG_PACKAGE_librt=y
-CONFIG_PACKAGE_libstdcpp=y
+# CONFIG_PACKAGE_libstdcpp is not set
 CONFIG_PACKAGE_logd=y
 CONFIG_PACKAGE_mtd=y
 CONFIG_PACKAGE_netifd=y
@@ -1722,8 +1759,8 @@ CONFIG_PACKAGE_procd=y
 
 CONFIG_PACKAGE_procd-seccomp=y
 # CONFIG_PACKAGE_procd-selinux is not set
-# CONFIG_PACKAGE_procd-ujail is not set
-CONFIG_PACKAGE_qos-scripts=y
+CONFIG_PACKAGE_procd-ujail=y
+# CONFIG_PACKAGE_qos-scripts is not set
 # CONFIG_PACKAGE_rdloader is not set
 # CONFIG_PACKAGE_refpolicy is not set
 CONFIG_PACKAGE_resolveip=y
@@ -1748,7 +1785,7 @@ CONFIG_PACKAGE_urandom-seed=y
 CONFIG_PACKAGE_urngd=y
 CONFIG_PACKAGE_usign=y
 # CONFIG_PACKAGE_uxc is not set
-# CONFIG_PACKAGE_wireless-tools is not set
+CONFIG_PACKAGE_wireless-tools=y
 # CONFIG_PACKAGE_zram-swap is not set
 # CONFIG_PACKAGE_zyxel-bootconfig is not set
 # end of Base system
@@ -1763,7 +1800,6 @@ CONFIG_PACKAGE_usign=y
 # CONFIG_PACKAGE_zabbix-agentd is not set
 # CONFIG_PACKAGE_zabbix-agentd-gnutls is not set
 # CONFIG_PACKAGE_zabbix-agentd-openssl is not set
-# CONFIG_PACKAGE_zabbix-extra-mac80211 is not set
 # CONFIG_PACKAGE_zabbix-extra-network is not set
 # CONFIG_PACKAGE_zabbix-extra-wifi is not set
 # CONFIG_PACKAGE_zabbix-get is not set
@@ -1862,7 +1898,6 @@ CONFIG_ZABBIX_POSTGRESQL=y
 # CONFIG_PACKAGE_lttng-tools is not set
 # CONFIG_PACKAGE_m4 is not set
 # CONFIG_PACKAGE_make is not set
-# CONFIG_PACKAGE_mt76-test is not set
 # CONFIG_PACKAGE_objdump is not set
 # CONFIG_PACKAGE_packr is not set
 # CONFIG_PACKAGE_patch is not set
@@ -2072,7 +2107,7 @@ CONFIG_ZABBIX_POSTGRESQL=y
 # CONFIG_PACKAGE_ti-3410-firmware is not set
 # CONFIG_PACKAGE_ti-5052-firmware is not set
 # CONFIG_PACKAGE_wil6210-firmware is not set
-CONFIG_PACKAGE_wireless-regdb=y
+# CONFIG_PACKAGE_wireless-regdb is not set
 # CONFIG_PACKAGE_wl12xx-firmware is not set
 # CONFIG_PACKAGE_wl18xx-firmware is not set
 # end of Firmware
@@ -2156,10 +2191,10 @@ CONFIG_PACKAGE_kmod-crypto-aead=y
 CONFIG_PACKAGE_kmod-crypto-arc4=y
 CONFIG_PACKAGE_kmod-crypto-authenc=y
 # CONFIG_PACKAGE_kmod-crypto-cbc is not set
-CONFIG_PACKAGE_kmod-crypto-ccm=y
-CONFIG_PACKAGE_kmod-crypto-cmac=y
+# CONFIG_PACKAGE_kmod-crypto-ccm is not set
+# CONFIG_PACKAGE_kmod-crypto-cmac is not set
 # CONFIG_PACKAGE_kmod-crypto-crc32c is not set
-CONFIG_PACKAGE_kmod-crypto-ctr=y
+# CONFIG_PACKAGE_kmod-crypto-ctr is not set
 # CONFIG_PACKAGE_kmod-crypto-cts is not set
 # CONFIG_PACKAGE_kmod-crypto-deflate is not set
 CONFIG_PACKAGE_kmod-crypto-des=y
@@ -2167,17 +2202,17 @@ CONFIG_PACKAGE_kmod-crypto-ecb=y
 # CONFIG_PACKAGE_kmod-crypto-ecdh is not set
 # CONFIG_PACKAGE_kmod-crypto-echainiv is not set
 # CONFIG_PACKAGE_kmod-crypto-fcrypt is not set
-CONFIG_PACKAGE_kmod-crypto-gcm=y
-CONFIG_PACKAGE_kmod-crypto-gf128=y
-CONFIG_PACKAGE_kmod-crypto-ghash=y
+# CONFIG_PACKAGE_kmod-crypto-gcm is not set
+# CONFIG_PACKAGE_kmod-crypto-gf128 is not set
+# CONFIG_PACKAGE_kmod-crypto-ghash is not set
 CONFIG_PACKAGE_kmod-crypto-hash=y
-CONFIG_PACKAGE_kmod-crypto-hmac=y
+# CONFIG_PACKAGE_kmod-crypto-hmac is not set
 CONFIG_PACKAGE_kmod-crypto-hw-eip93=y
 CONFIG_MTK_EIP93_GENERIC_SW_MAX_LEN=256
 CONFIG_MTK_EIP93_AES_128_SW_MAX_LEN=512
 # CONFIG_PACKAGE_kmod-crypto-hw-hifn-795x is not set
 # CONFIG_PACKAGE_kmod-crypto-hw-padlock is not set
-# CONFIG_PACKAGE_kmod-crypto-kpp is not set
+CONFIG_PACKAGE_kmod-crypto-kpp=y
 CONFIG_PACKAGE_kmod-crypto-lib-chacha20=y
 CONFIG_PACKAGE_kmod-crypto-lib-chacha20poly1305=y
 CONFIG_PACKAGE_kmod-crypto-lib-curve25519=y
@@ -2190,8 +2225,8 @@ CONFIG_PACKAGE_kmod-crypto-md5=y
 CONFIG_PACKAGE_kmod-crypto-null=y
 # CONFIG_PACKAGE_kmod-crypto-pcbc is not set
 # CONFIG_PACKAGE_kmod-crypto-rmd160 is not set
-CONFIG_PACKAGE_kmod-crypto-rng=y
-CONFIG_PACKAGE_kmod-crypto-seqiv=y
+# CONFIG_PACKAGE_kmod-crypto-rng is not set
+# CONFIG_PACKAGE_kmod-crypto-seqiv is not set
 CONFIG_PACKAGE_kmod-crypto-sha1=y
 CONFIG_PACKAGE_kmod-crypto-sha256=y
 # CONFIG_PACKAGE_kmod-crypto-sha512 is not set
@@ -2375,6 +2410,7 @@ CONFIG_PACKAGE_kmod-leds-gpio=y
 #
 # Libraries
 #
+CONFIG_PACKAGE_kmod-asn1-decoder=y
 # CONFIG_PACKAGE_kmod-lib-cordic is not set
 CONFIG_PACKAGE_kmod-lib-crc-ccitt=y
 # CONFIG_PACKAGE_kmod-lib-crc-itu-t is not set
@@ -2384,7 +2420,7 @@ CONFIG_PACKAGE_kmod-lib-crc-ccitt=y
 # CONFIG_PACKAGE_kmod-lib-crc8 is not set
 # CONFIG_PACKAGE_kmod-lib-lz4 is not set
 CONFIG_PACKAGE_kmod-lib-lzo=y
-# CONFIG_PACKAGE_kmod-lib-textsearch is not set
+CONFIG_PACKAGE_kmod-lib-textsearch=y
 # CONFIG_PACKAGE_kmod-lib-zstd is not set
 # CONFIG_PACKAGE_kmod-oid-registry is not set
 # end of Libraries
@@ -2424,7 +2460,7 @@ CONFIG_PACKAGE_kmod-lib-lzo=y
 # CONFIG_PACKAGE_kmod-ebtables-ipv4 is not set
 # CONFIG_PACKAGE_kmod-ebtables-ipv6 is not set
 # CONFIG_PACKAGE_kmod-ebtables-watchers is not set
-CONFIG_PACKAGE_kmod-ip6tables=y
+# CONFIG_PACKAGE_kmod-ip6tables is not set
 # CONFIG_PACKAGE_kmod-ip6tables-extra is not set
 # CONFIG_PACKAGE_kmod-ipt-account is not set
 # CONFIG_PACKAGE_kmod-ipt-chaos is not set
@@ -2441,7 +2477,7 @@ CONFIG_PACKAGE_kmod-ipt-core=y
 # CONFIG_PACKAGE_kmod-ipt-delude is not set
 # CONFIG_PACKAGE_kmod-ipt-dhcpmac is not set
 # CONFIG_PACKAGE_kmod-ipt-dnetmap is not set
-# CONFIG_PACKAGE_kmod-ipt-extra is not set
+CONFIG_PACKAGE_kmod-ipt-extra=y
 # CONFIG_PACKAGE_kmod-ipt-filter is not set
 CONFIG_PACKAGE_kmod-ipt-fullconenat=y
 # CONFIG_PACKAGE_kmod-ipt-fuzzy is not set
@@ -2487,16 +2523,16 @@ CONFIG_PACKAGE_kmod-nf-conntrack-netlink=y
 CONFIG_PACKAGE_kmod-nf-conntrack6=y
 CONFIG_PACKAGE_kmod-nf-flow=y
 CONFIG_PACKAGE_kmod-nf-ipt=y
-CONFIG_PACKAGE_kmod-nf-ipt6=y
+# CONFIG_PACKAGE_kmod-nf-ipt6 is not set
 # CONFIG_PACKAGE_kmod-nf-ipvs is not set
 CONFIG_PACKAGE_kmod-nf-log=y
-CONFIG_PACKAGE_kmod-nf-log6=y
+# CONFIG_PACKAGE_kmod-nf-log6 is not set
 CONFIG_PACKAGE_kmod-nf-nat=y
 # CONFIG_PACKAGE_kmod-nf-nat6 is not set
-# CONFIG_PACKAGE_kmod-nf-nathelper is not set
-# CONFIG_PACKAGE_kmod-nf-nathelper-extra is not set
+CONFIG_PACKAGE_kmod-nf-nathelper=y
+CONFIG_PACKAGE_kmod-nf-nathelper-extra=y
 CONFIG_PACKAGE_kmod-nf-reject=y
-CONFIG_PACKAGE_kmod-nf-reject6=y
+# CONFIG_PACKAGE_kmod-nf-reject6 is not set
 # CONFIG_PACKAGE_kmod-nf-socket is not set
 CONFIG_PACKAGE_kmod-nf-tproxy=y
 CONFIG_PACKAGE_kmod-nfnetlink=y
@@ -2545,7 +2581,7 @@ CONFIG_PACKAGE_kmod-nfnetlink=y
 # CONFIG_PACKAGE_kmod-i40e is not set
 # CONFIG_PACKAGE_kmod-iavf is not set
 # CONFIG_PACKAGE_kmod-ice is not set
-CONFIG_PACKAGE_kmod-ifb=y
+# CONFIG_PACKAGE_kmod-ifb is not set
 # CONFIG_PACKAGE_kmod-igb is not set
 # CONFIG_PACKAGE_kmod-igc is not set
 # CONFIG_PACKAGE_kmod-ipvlan is not set
@@ -2611,7 +2647,7 @@ CONFIG_PACKAGE_kmod-mtk-hnat=y
 # CONFIG_PACKAGE_kmod-bonding is not set
 # CONFIG_PACKAGE_kmod-bpf-test is not set
 # CONFIG_PACKAGE_kmod-dnsresolver is not set
-CONFIG_PACKAGE_kmod-fast-classifier=m
+# CONFIG_PACKAGE_kmod-fast-classifier is not set
 # CONFIG_PACKAGE_kmod-fou is not set
 # CONFIG_PACKAGE_kmod-fou6 is not set
 # CONFIG_PACKAGE_kmod-geneve is not set
@@ -2662,8 +2698,8 @@ CONFIG_PACKAGE_kmod-pppox=y
 # CONFIG_PACKAGE_kmod-sched-act-vlan is not set
 # CONFIG_PACKAGE_kmod-sched-bpf is not set
 # CONFIG_PACKAGE_kmod-sched-cake is not set
-CONFIG_PACKAGE_kmod-sched-connmark=y
-CONFIG_PACKAGE_kmod-sched-core=y
+# CONFIG_PACKAGE_kmod-sched-connmark is not set
+# CONFIG_PACKAGE_kmod-sched-core is not set
 # CONFIG_PACKAGE_kmod-sched-ctinfo is not set
 # CONFIG_PACKAGE_kmod-sched-flower is not set
 # CONFIG_PACKAGE_kmod-sched-ipset is not set
@@ -2677,7 +2713,7 @@ CONFIG_PACKAGE_kmod-slhc=y
 CONFIG_PACKAGE_kmod-tcp-bbr=y
 # CONFIG_PACKAGE_kmod-tcp-hybla is not set
 # CONFIG_PACKAGE_kmod-trelay is not set
-# CONFIG_PACKAGE_kmod-tun is not set
+CONFIG_PACKAGE_kmod-tun=y
 CONFIG_PACKAGE_kmod-udptunnel4=y
 CONFIG_PACKAGE_kmod-udptunnel6=y
 # CONFIG_PACKAGE_kmod-veth is not set
@@ -2932,21 +2968,201 @@ CONFIG_ZRAM_DEF_COMP_LZORLE=y
 # CONFIG_PACKAGE_kmod-brcmsmac is not set
 # CONFIG_PACKAGE_kmod-brcmutil is not set
 # CONFIG_PACKAGE_kmod-carl9170 is not set
-CONFIG_PACKAGE_kmod-cfg80211=y
-# CONFIG_PACKAGE_CFG80211_TESTMODE is not set
+# CONFIG_PACKAGE_kmod-cfg80211 is not set
 # CONFIG_PACKAGE_kmod-iwlwifi is not set
-CONFIG_PACKAGE_kmod-mac80211=y
-CONFIG_PACKAGE_MAC80211_DEBUGFS=y
-# CONFIG_PACKAGE_MAC80211_TRACING is not set
-CONFIG_PACKAGE_MAC80211_MESH=y
+# CONFIG_PACKAGE_kmod-mac80211 is not set
 # CONFIG_PACKAGE_kmod-mac80211-hwsim is not set
 # CONFIG_PACKAGE_kmod-mt76 is not set
-CONFIG_PACKAGE_kmod-mt76-core=y
 # CONFIG_PACKAGE_kmod-mt7601u is not set
 # CONFIG_PACKAGE_kmod-mt7603 is not set
-# CONFIG_PACKAGE_kmod-mt7603e is not set
+CONFIG_PACKAGE_kmod-mt7603e=y
+CONFIG_MT7603E_FIRST_IF_MT7603E=y
+CONFIG_MT7603E_RLT_WIFI=y
+CONFIG_MT7603E_MT_WIFI_PATH="rlt_wifi"
+
+#
+# WiFi Generic Feature Options
+#
+CONFIG_MT7603E_FIRST_IF_EEPROM_FLASH=y
+# CONFIG_MT7603E_FIRST_IF_EEPROM_PROM is not set
+# CONFIG_MT7603E_FIRST_IF_EEPROM_EFUSE is not set
+CONFIG_MT7603E_RT_FIRST_CARD_EEPROM="flash"
+CONFIG_MT7603E_MULTI_INF_SUPPORT=y
+CONFIG_MT7603E_WSC_INCLUDED=y
+# CONFIG_MT7603E_WSC_NFC_SUPPORT is not set
+CONFIG_MT7603E_DOT11N_DRAFT3=y
+CONFIG_MT7603E_DOT11W_PMF_SUPPORT=y
+# CONFIG_MT7603E_TXBF_SUPPORT is not set
+CONFIG_MT7603E_LLTD_SUPPORT=y
+# CONFIG_MT7603E_QOS_DLS_SUPPORT is not set
+# CONFIG_MT7603E_WAPI_SUPPORT is not set
+# CONFIG_MT7603E_CARRIER_DETECTION_SUPPORT is not set
+# CONFIG_MT7603E_IGMP_SNOOP_SUPPORT is not set
+# CONFIG_MT7603E_BLOCK_NET_IF is not set
+CONFIG_MT7603E_NEW_RATE_ADAPT_SUPPORT=y
+CONFIG_MT7603E_MT_NEW_RATE_ADAPT_SUPPORT=y
+# CONFIG_MT7603E_IDS_SUPPORT is not set
+# CONFIG_MT7603E_WIFI_WORK_QUEUE is not set
+# CONFIG_MT7603E_WIFI_SKB_RECYCLE is not set
+CONFIG_MT7603E_RTMP_FLASH_SUPPORT=y
+# CONFIG_MT7603E_LED_CONTROL_SUPPORT is not set
+# CONFIG_MT7603E_SINGLE_SKU is not set
+CONFIG_MT7603E_ATE_SUPPORT=y
+CONFIG_MT7603E_RT2860V2_AP_V24_DATA_STRUCTURE=y
+# CONFIG_MT7603E_MEMORY_OPTIMIZATION is not set
+# CONFIG_MT7603E_HOTSPOT is not set
+# CONFIG_MT7603E_MT_RTMP_TEMPERATURE_TX_ALC is not set
+CONFIG_MT7603E_UAPSD=y
+# CONFIG_MT7603E_RLT_MAC is not set
+CONFIG_MT7603E_RTMP_PCI_SUPPORT=y
+# end of WiFi Generic Feature Options
+
+#
+# WiFi Operation Modes
+#
+CONFIG_MT7603E_MT_WIFI_MODE_AP=y
+# CONFIG_MT7603E_MT_WIFI_MODE_STA is not set
+# CONFIG_MT7603E_MT_WIFI_MODE_BOTH is not set
+CONFIG_MT7603E_RLT_AP_SUPPORT=y
+# CONFIG_MT7603E_WDS_SUPPORT is not set
+CONFIG_MT7603E_MBSS_SUPPORT=y
+# CONFIG_MT7603E_NEW_MBSSID_MODE is not set
+# CONFIG_MT7603E_CFG80211_SUPPORT is not set
+# CONFIG_MT7603E_ALL_NET_EVENT is not set
+# CONFIG_MT7603E_ACL_V2_SUPPORT is not set
+CONFIG_MT7603E_APCLI_SUPPORT=y
+CONFIG_MT7603E_MULTI_APCLI_SUPPORT=y
+CONFIG_MT7603E_MAC_REPEATER_SUPPORT=y
+# CONFIG_MT7603E_AIRPLAY_SUPPORT is not set
+# CONFIG_MT7603E_DFS_SUPPORT is not set
+# CONFIG_MT7603E_NINTENDO_AP is not set
+# CONFIG_MT7603E_COC_SUPPORT is not set
+# CONFIG_MT7603E_MCAST_RATE_SPECIFIC is not set
+# CONFIG_MT7603E_PREVENT_ARP_SPOOFING_SUPPORT is not set
+# CONFIG_MT7603E_MULTI_CORE_SUPPORT is not set
+# CONFIG_MT7603E_SNIFFER_SUPPORT is not set
+# CONFIG_MT7603E_DOT11R_FT_SUPPORT is not set
+# CONFIG_MT7603E_DOT11K_RRM_SUPPORT is not set
+# CONFIG_MT7603E_WNM_SUPPORT is not set
+# CONFIG_MT7603E_BAND_STEERING_7603 is not set
+# CONFIG_MT7603E_SECURITY_IMPROVEMENT_SUPPORT is not set
+# CONFIG_MT7603E_WPA3_SUPPORT is not set
+# CONFIG_MT7603E_OWE_SUPPORT is not set
+CONFIG_MT7603E_NEW_BW2040_COEXIST_SUPPORT=y
+# end of WiFi Operation Modes
+
+CONFIG_MT7603E_RALINK_MT7603E=y
+CONFIG_MT7603E_MT_MAC=y
 # CONFIG_PACKAGE_kmod-mt7615-firmware is not set
-# CONFIG_PACKAGE_kmod-mt7615d is not set
+CONFIG_PACKAGE_kmod-mt7615d=y
+CONFIG_MTK_SUPPORT_OPENWRT=y
+CONFIG_MTK_WIFI_DRIVER=y
+CONFIG_MTK_FIRST_IF_MT7615E=y
+# CONFIG_MTK_FIRST_IF_MT7622 is not set
+# CONFIG_MTK_FIRST_IF_MT7626 is not set
+# CONFIG_MTK_FIRST_IF_NONE is not set
+CONFIG_MTK_SECOND_IF_NONE=y
+# CONFIG_MTK_SECOND_IF_MT7615E is not set
+CONFIG_MTK_THIRD_IF_NONE=y
+# CONFIG_MTK_THIRD_IF_MT7615E is not set
+CONFIG_MTK_RT_FIRST_CARD=7615
+CONFIG_MTK_RT_FIRST_IF_RF_OFFSET=0xc0000
+CONFIG_MTK_MT_WIFI=y
+CONFIG_MTK_MT_WIFI_PATH="mt_wifi"
+
+#
+# WiFi Generic Feature Options
+#
+CONFIG_MTK_FIRST_IF_EEPROM_FLASH=y
+# CONFIG_MTK_FIRST_IF_EEPROM_PROM is not set
+# CONFIG_MTK_FIRST_IF_EEPROM_EFUSE is not set
+CONFIG_MTK_RT_FIRST_CARD_EEPROM="flash"
+CONFIG_MTK_WIFI_BASIC_FUNC=y
+CONFIG_MTK_DOT11_N_SUPPORT=y
+CONFIG_MTK_DOT11_VHT_AC=y
+CONFIG_MTK_G_BAND_256QAM_SUPPORT=y
+CONFIG_MTK_BRCM_256QAM_SUPPORT=y
+CONFIG_MTK_VHT_TXBF_2G_EPIGRAM_IE_SUPPORT=y
+CONFIG_MTK_TPC_SUPPORT=y
+CONFIG_MTK_ICAP_SUPPORT=y
+CONFIG_MTK_SPECTRUM_SUPPORT=y
+CONFIG_MTK_BACKGROUND_SCAN_SUPPORT=y
+CONFIG_MTK_SMART_CARRIER_SENSE_SUPPORT=y
+CONFIG_MTK_MT_DFS_SUPPORT=y
+CONFIG_MTK_HDR_TRANS_TX_SUPPORT=y
+CONFIG_MTK_HDR_TRANS_RX_SUPPORT=y
+# CONFIG_MTK_DBDC_MODE is not set
+CONFIG_MTK_WSC_INCLUDED=y
+CONFIG_MTK_WSC_V2_SUPPORT=y
+CONFIG_MTK_DOT11W_PMF_SUPPORT=y
+CONFIG_MTK_TXBF_SUPPORT=y
+# CONFIG_MTK_FAST_NAT_SUPPORT is not set
+# CONFIG_MTK_FTM_SUPPORT is not set
+CONFIG_MTK_IGMP_SNOOP_SUPPORT=y
+CONFIG_MTK_RTMP_FLASH_SUPPORT=y
+CONFIG_MTK_PRE_CAL_TRX_SET1_SUPPORT=y
+CONFIG_MTK_RLM_CAL_CACHE_SUPPORT=y
+CONFIG_MTK_PRE_CAL_TRX_SET2_SUPPORT=y
+# CONFIG_MTK_RF_LOCKDOWN_SUPPORT is not set
+# CONFIG_MTK_LINK_TEST_SUPPORT is not set
+CONFIG_MTK_ATE_SUPPORT=y
+# CONFIG_MTK_PASSPOINT_R2 is not set
+# CONFIG_MTK_MBO_SUPPORT is not set
+CONFIG_MTK_UAPSD=y
+CONFIG_MTK_TCP_RACK_SUPPORT=y
+CONFIG_MTK_RED_SUPPORT=y
+# CONFIG_MTK_FDB_SUPPORT is not set
+CONFIG_MTK_FIRST_IF_IPAILNA=y
+# CONFIG_MTK_FIRST_IF_IPAELNA is not set
+# CONFIG_MTK_FIRST_IF_EPAELNA is not set
+# CONFIG_MTK_RLT_MAC is not set
+# CONFIG_MTK_RTMP_MAC is not set
+# end of WiFi Generic Feature Options
+
+#
+# WiFi Operation Modes
+#
+CONFIG_MTK_WIFI_MODE_AP=y
+# CONFIG_MTK_WIFI_MODE_STA is not set
+# CONFIG_MTK_WIFI_MODE_BOTH is not set
+CONFIG_MTK_MT_AP_SUPPORT=y
+CONFIG_MTK_WDS_SUPPORT=y
+CONFIG_MTK_MBSS_SUPPORT=y
+CONFIG_MTK_APCLI_SUPPORT=y
+# CONFIG_MTK_APCLI_CERT_SUPPORT is not set
+CONFIG_MTK_MAC_REPEATER_SUPPORT=y
+# CONFIG_MTK_MWDS is not set
+CONFIG_MTK_MUMIMO_SUPPORT=y
+CONFIG_MTK_MU_RA_SUPPORT=y
+# CONFIG_MTK_DOT11R_FT_SUPPORT is not set
+# CONFIG_MTK_DOT11K_RRM_SUPPORT is not set
+# CONFIG_MTK_CFG80211_SUPPORT is not set
+# CONFIG_MTK_DSCP_PRI_SUPPORT is not set
+# CONFIG_MTK_CON_WPS_SUPPORT is not set
+CONFIG_MTK_MCAST_RATE_SPECIFIC=y
+CONFIG_MTK_VOW_SUPPORT=y
+CONFIG_MTK_BAND_STEERING=y
+CONFIG_MTK_LED_CONTROL_SUPPORT=y
+# CONFIG_MTK_WLAN_HOOK is not set
+# CONFIG_MTK_RADIUS_ACCOUNTING_SUPPORT is not set
+# CONFIG_MTK_GREENAP_SUPPORT is not set
+CONFIG_MTK_PCIE_ASPM_DYM_CTRL_SUPPORT=y
+# CONFIG_MTK_COEX_SUPPORT is not set
+# CONFIG_MTK_EASY_SETUP_SUPPORT is not set
+# CONFIG_MTK_EVENT_NOTIFIER_SUPPORT is not set
+# CONFIG_MTK_AIR_MONITOR is not set
+# CONFIG_MTK_WNM_SUPPORT is not set
+# CONFIG_MTK_INTERWORKING is not set
+CONFIG_MTK_LINUX_NET_TXQ_SUPPORT=y
+# end of WiFi Operation Modes
+
+CONFIG_MTK_WIFI_MT_MAC=y
+CONFIG_MTK_MT_MAC=y
+# CONFIG_MTK_CHIP_MT7603E is not set
+CONFIG_MTK_CHIP_MT7615E=y
+# CONFIG_MTK_CHIP_MT7622 is not set
+# CONFIG_MTK_CHIP_MT7663E is not set
+# CONFIG_MTK_CHIP_MT7626 is not set
 # CONFIG_PACKAGE_kmod-mt7615d_dbdc is not set
 # CONFIG_PACKAGE_kmod-mt7615e is not set
 # CONFIG_PACKAGE_kmod-mt7622-firmware is not set
@@ -2954,11 +3170,9 @@ CONFIG_PACKAGE_kmod-mt76-core=y
 # CONFIG_PACKAGE_kmod-mt7663-firmware-sta is not set
 # CONFIG_PACKAGE_kmod-mt7663s is not set
 # CONFIG_PACKAGE_kmod-mt7663u is not set
-CONFIG_PACKAGE_kmod-mt76x02-common=y
 # CONFIG_PACKAGE_kmod-mt76x0e is not set
 # CONFIG_PACKAGE_kmod-mt76x0u is not set
-CONFIG_PACKAGE_kmod-mt76x2=y
-CONFIG_PACKAGE_kmod-mt76x2-common=y
+# CONFIG_PACKAGE_kmod-mt76x2 is not set
 # CONFIG_PACKAGE_kmod-mt76x2e is not set
 # CONFIG_PACKAGE_kmod-mt76x2u is not set
 # CONFIG_PACKAGE_kmod-mt7915-firmware is not set
@@ -2979,9 +3193,7 @@ CONFIG_PACKAGE_kmod-mt76x2-common=y
 # CONFIG_PACKAGE_kmod-rsi91x-usb is not set
 # CONFIG_PACKAGE_kmod-rt2800-pci is not set
 # CONFIG_PACKAGE_kmod-rt2800-usb is not set
-CONFIG_PACKAGE_kmod-rt2x00-lib=y
-# CONFIG_PACKAGE_RT2X00_LIB_DEBUGFS is not set
-# CONFIG_PACKAGE_RT2X00_DEBUG is not set
+# CONFIG_PACKAGE_kmod-rt2x00-lib is not set
 # CONFIG_PACKAGE_kmod-rtl8192ce is not set
 # CONFIG_PACKAGE_kmod-rtl8192cu is not set
 # CONFIG_PACKAGE_kmod-rtl8192de is not set
@@ -3978,18 +4190,83 @@ CONFIG_QT5_INCLUDE_ATOMIC=y
 #
 # CONFIG_PACKAGE_libgnutls is not set
 # CONFIG_PACKAGE_libgnutls-dane is not set
-# CONFIG_PACKAGE_libmbedtls is not set
+CONFIG_PACKAGE_libmbedtls=y
+
+#
+# Option details in source code: include/mbedtls/mbedtls_config.h
+#
+
+#
+# Ciphers - unselect old or less-used ciphers to reduce binary size
+#
+CONFIG_MBEDTLS_AES_C=y
+# CONFIG_MBEDTLS_CAMELLIA_C is not set
+# CONFIG_MBEDTLS_CCM_C is not set
+CONFIG_MBEDTLS_CMAC_C=y
+CONFIG_MBEDTLS_DES_C=y
+CONFIG_MBEDTLS_GCM_C=y
+CONFIG_MBEDTLS_NIST_KW_C=y
+# CONFIG_MBEDTLS_RIPEMD160_C is not set
+# CONFIG_MBEDTLS_XTEA_C is not set
+CONFIG_MBEDTLS_RSA_NO_CRT=y
+CONFIG_MBEDTLS_KEY_EXCHANGE_PSK_ENABLED=y
+# CONFIG_MBEDTLS_KEY_EXCHANGE_DHE_PSK_ENABLED is not set
+CONFIG_MBEDTLS_KEY_EXCHANGE_ECDHE_PSK_ENABLED=y
+# CONFIG_MBEDTLS_KEY_EXCHANGE_RSA_PSK_ENABLED is not set
+# CONFIG_MBEDTLS_KEY_EXCHANGE_RSA_ENABLED is not set
+# CONFIG_MBEDTLS_KEY_EXCHANGE_DHE_RSA_ENABLED is not set
+CONFIG_MBEDTLS_KEY_EXCHANGE_ECDHE_RSA_ENABLED=y
+CONFIG_MBEDTLS_KEY_EXCHANGE_ECDHE_ECDSA_ENABLED=y
+# CONFIG_MBEDTLS_KEY_EXCHANGE_ECDH_ECDSA_ENABLED is not set
+# CONFIG_MBEDTLS_KEY_EXCHANGE_ECDH_RSA_ENABLED is not set
+
+#
+# Curves - unselect old or less-used curves to reduce binary size
+#
+# CONFIG_MBEDTLS_ECP_DP_SECP192R1_ENABLED is not set
+# CONFIG_MBEDTLS_ECP_DP_SECP224R1_ENABLED is not set
+CONFIG_MBEDTLS_ECP_DP_SECP256R1_ENABLED=y
+CONFIG_MBEDTLS_ECP_DP_SECP384R1_ENABLED=y
+# CONFIG_MBEDTLS_ECP_DP_SECP521R1_ENABLED is not set
+# CONFIG_MBEDTLS_ECP_DP_SECP192K1_ENABLED is not set
+# CONFIG_MBEDTLS_ECP_DP_SECP224K1_ENABLED is not set
+CONFIG_MBEDTLS_ECP_DP_SECP256K1_ENABLED=y
+# CONFIG_MBEDTLS_ECP_DP_BP256R1_ENABLED is not set
+# CONFIG_MBEDTLS_ECP_DP_BP384R1_ENABLED is not set
+# CONFIG_MBEDTLS_ECP_DP_BP512R1_ENABLED is not set
+CONFIG_MBEDTLS_ECP_DP_CURVE25519_ENABLED=y
+# CONFIG_MBEDTLS_ECP_DP_CURVE448_ENABLED is not set
+
+#
+# Build Options - unselect features to reduce binary size
+#
+# CONFIG_MBEDTLS_CERTS_C is not set
+# CONFIG_MBEDTLS_CIPHER_MODE_OFB is not set
+# CONFIG_MBEDTLS_CIPHER_MODE_XTS is not set
+# CONFIG_MBEDTLS_DEBUG_C is not set
+# CONFIG_MBEDTLS_HKDF_C is not set
+# CONFIG_MBEDTLS_PLATFORM_C is not set
+# CONFIG_MBEDTLS_SELF_TEST is not set
+# CONFIG_MBEDTLS_SSL_TRUNCATED_HMAC is not set
+# CONFIG_MBEDTLS_VERSION_C is not set
+# CONFIG_MBEDTLS_VERSION_FEATURES is not set
+
+#
+# Build Options
+#
+CONFIG_MBEDTLS_ENTROPY_FORCE_SHA256=y
+# CONFIG_MBEDTLS_SSL_RENEGOTIATION is not set
 # CONFIG_PACKAGE_libnss is not set
 CONFIG_PACKAGE_libopenssl=y
 
 #
 # Build Options
 #
-# CONFIG_OPENSSL_OPTIMIZE_SPEED is not set
+CONFIG_OPENSSL_OPTIMIZE_SPEED=y
 CONFIG_OPENSSL_WITH_ASM=y
 CONFIG_OPENSSL_WITH_DEPRECATED=y
 # CONFIG_OPENSSL_NO_DEPRECATED is not set
-# CONFIG_OPENSSL_WITH_ERROR_MESSAGES is not set
+CONFIG_OPENSSL_WITH_ERROR_MESSAGES=y
 
 #
 # Protocol Support
@@ -4028,7 +4305,7 @@ CONFIG_OPENSSL_WITH_PSK=y
 CONFIG_OPENSSL_ENGINE=y
 CONFIG_OPENSSL_ENGINE_BUILTIN=y
 CONFIG_OPENSSL_ENGINE_BUILTIN_AFALG=y
-# CONFIG_OPENSSL_ENGINE_BUILTIN_DEVCRYPTO is not set
+CONFIG_OPENSSL_ENGINE_BUILTIN_DEVCRYPTO=y
 CONFIG_PACKAGE_libopenssl-conf=y
 # CONFIG_PACKAGE_libopenssl-devcrypto is not set
 # CONFIG_PACKAGE_libopenssl-gost_engine is not set
@@ -4337,22 +4614,15 @@ CONFIG_PACKAGE_libmnl=y
 # CONFIG_PACKAGE_libnet-1.2.x is not set
 # CONFIG_PACKAGE_libnetconf2 is not set
 # CONFIG_PACKAGE_libnetfilter-acct is not set
-CONFIG_PACKAGE_libnetfilter-conntrack=y
+# CONFIG_PACKAGE_libnetfilter-conntrack is not set
 # CONFIG_PACKAGE_libnetfilter-cthelper is not set
 # CONFIG_PACKAGE_libnetfilter-cttimeout is not set
 # CONFIG_PACKAGE_libnetfilter-log is not set
 # CONFIG_PACKAGE_libnetfilter-queue is not set
 # CONFIG_PACKAGE_libnetsnmp is not set
-CONFIG_PACKAGE_libnettle=y
-
-#
-# Configuration
-#
-CONFIG_LIBNETTLE_MINI=y
-# end of Configuration
-
+# CONFIG_PACKAGE_libnettle is not set
 # CONFIG_PACKAGE_libnewt is not set
-CONFIG_PACKAGE_libnfnetlink=y
+# CONFIG_PACKAGE_libnfnetlink is not set
 # CONFIG_PACKAGE_libnftnl is not set
 CONFIG_PACKAGE_libnghttp2=y
 # CONFIG_PACKAGE_libnl is not set
@@ -4576,7 +4846,7 @@ CONFIG_PACKAGE_zlib=y
 #
 # Configuration
 #
-# CONFIG_ZLIB_OPTIMIZE_SPEED is not set
+CONFIG_ZLIB_OPTIMIZE_SPEED=y
 # end of Configuration
 
 # CONFIG_PACKAGE_zlog is not set
@@ -4645,7 +4915,7 @@ CONFIG_PACKAGE_luci-newapi=y
 CONFIG_PACKAGE_luci-app-accesscontrol=y
 # CONFIG_PACKAGE_luci-app-acme is not set
 # CONFIG_PACKAGE_luci-app-adblock is not set
-# CONFIG_PACKAGE_luci-app-adbyby-plus is not set
+CONFIG_PACKAGE_luci-app-adbyby-plus=y
 # CONFIG_PACKAGE_luci-app-adguardhome is not set
 CONFIG_PACKAGE_luci-app-adguardhome_INCLUDE_binary=y
 # CONFIG_PACKAGE_luci-app-advanced is not set
@@ -4707,7 +4977,7 @@ CONFIG_PACKAGE_luci-app-ddns=y
 # CONFIG_PACKAGE_luci-app-e2guardian is not set
 # CONFIG_PACKAGE_luci-app-easymesh is not set
 # CONFIG_PACKAGE_luci-app-easyupdate is not set
-CONFIG_PACKAGE_luci-app-eqos=y
+# CONFIG_PACKAGE_luci-app-eqos is not set
 # CONFIG_PACKAGE_luci-app-fileassistant is not set
 # CONFIG_PACKAGE_luci-app-filebrowser is not set
 CONFIG_PACKAGE_luci-app-filetransfer=y
@@ -4730,9 +5000,9 @@ CONFIG_PACKAGE_luci-app-firewall=y
 # CONFIG_PACKAGE_luci-app-minidlna is not set
 # CONFIG_PACKAGE_luci-app-mjpg-streamer is not set
 # CONFIG_PACKAGE_luci-app-mosdns is not set
-# CONFIG_PACKAGE_luci-app-mtwifi is not set
+CONFIG_PACKAGE_luci-app-mtwifi=y
 # CONFIG_PACKAGE_luci-app-music-remote-center is not set
-# CONFIG_PACKAGE_luci-app-mwan3 is not set
+CONFIG_PACKAGE_luci-app-mwan3=y
 # CONFIG_PACKAGE_luci-app-mwan3helper is not set
 # CONFIG_PACKAGE_luci-app-n2n is not set
 # CONFIG_PACKAGE_luci-app-netdata is not set
@@ -4758,20 +5028,19 @@ CONFIG_PACKAGE_luci-app-nlbwmon=y
 # Configuration
 #
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Brook is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG is not set
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ChinaDNS_NG=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Haproxy is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Hysteria is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_IPv6_Nat is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_NaiveProxy is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_PDNSD is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Client is not set
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_PDNSD=y
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Client=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Libev_Server is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Shadowsocks_Rust_Client is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Client is not set
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Client=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_ShadowsocksR_Libev_Server is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Simple_Obfs is not set
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Simple_Obfs=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_GO is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set
+CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus=y
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
 # CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Xray is not set
@@ -4818,20 +5087,20 @@ CONFIG_PACKAGE_luci-app-ssr-plus=y
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_NaiveProxy is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_IPT2Socks is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Redsocks2 is not set
-# CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client is not set
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Client=y
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Libev_Server is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Client is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Server is not set
 CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client=y
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Server is not set
-# CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Simple_Obfs is not set
+CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Simple_Obfs=y
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray_Plugin is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
 # CONFIG_PACKAGE_luci-app-ssrserver-python is not set
 # CONFIG_PACKAGE_luci-app-statistics is not set
 # CONFIG_PACKAGE_luci-app-store is not set
-# CONFIG_PACKAGE_luci-app-syncdial is not set
+CONFIG_PACKAGE_luci-app-syncdial=y
 # CONFIG_PACKAGE_luci-app-tinyproxy is not set
 # CONFIG_PACKAGE_luci-app-transmission is not set
 # CONFIG_PACKAGE_luci-app-travelmate is not set
@@ -4860,7 +5129,7 @@ CONFIG_PACKAGE_luci-app-upnp=y
 CONFIG_PACKAGE_luci-app-vlmcsd=y
 # CONFIG_PACKAGE_luci-app-vnstat is not set
 # CONFIG_PACKAGE_luci-app-vpnbypass is not set
-CONFIG_PACKAGE_luci-app-vsftpd=y
+# CONFIG_PACKAGE_luci-app-vsftpd is not set
 # CONFIG_PACKAGE_luci-app-vssr is not set
 # CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Xray is not set
 # CONFIG_PACKAGE_luci-app-vssr_INCLUDE_Trojan is not set
@@ -4939,6 +5208,7 @@ CONFIG_PACKAGE_luci-lib-nixio_openssl=y
 
 CONFIG_PACKAGE_default-settings=y
 CONFIG_PACKAGE_luci-i18n-accesscontrol-zh-cn=y
+CONFIG_PACKAGE_luci-i18n-adbyby-plus-zh-cn=y
 CONFIG_PACKAGE_luci-i18n-arpbind-zh-cn=y
 CONFIG_PACKAGE_luci-i18n-autoreboot-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-base-ca is not set
@@ -4996,8 +5266,6 @@ CONFIG_PACKAGE_luci-i18n-base-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-ddns-vi is not set
 CONFIG_PACKAGE_luci-i18n-ddns-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-ddns-zh-tw is not set
-CONFIG_PACKAGE_luci-i18n-eqos-zh-cn=y
-# CONFIG_PACKAGE_luci-i18n-eqos-zh_Hans is not set
 CONFIG_PACKAGE_luci-i18n-filetransfer-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-firewall-ca is not set
 # CONFIG_PACKAGE_luci-i18n-firewall-cs is not set
@@ -5025,6 +5293,10 @@ CONFIG_PACKAGE_luci-i18n-filetransfer-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-firewall-vi is not set
 CONFIG_PACKAGE_luci-i18n-firewall-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-firewall-zh-tw is not set
+# CONFIG_PACKAGE_luci-i18n-mwan3-ja is not set
+# CONFIG_PACKAGE_luci-i18n-mwan3-ru is not set
+CONFIG_PACKAGE_luci-i18n-mwan3-zh-cn=y
+# CONFIG_PACKAGE_luci-i18n-mwan3-zh-tw is not set
 # CONFIG_PACKAGE_luci-i18n-nlbwmon-ja is not set
 # CONFIG_PACKAGE_luci-i18n-nlbwmon-ru is not set
 CONFIG_PACKAGE_luci-i18n-nlbwmon-zh-cn=y
@@ -5057,7 +5329,6 @@ CONFIG_PACKAGE_luci-i18n-turboacc-zh-cn=y
 CONFIG_PACKAGE_luci-i18n-upnp-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-upnp-zh-tw is not set
 CONFIG_PACKAGE_luci-i18n-vlmcsd-zh-cn=y
-CONFIG_PACKAGE_luci-i18n-vsftpd-zh-cn=y
 # CONFIG_PACKAGE_luci-i18n-wireguard-ja is not set
 # CONFIG_PACKAGE_luci-i18n-wireguard-pt-br is not set
 # CONFIG_PACKAGE_luci-i18n-wireguard-ru is not set
@@ -5244,11 +5515,10 @@ CONFIG_PACKAGE_curl=y
 # CONFIG_PACKAGE_rsync is not set
 # CONFIG_PACKAGE_rsyncd is not set
 # CONFIG_PACKAGE_vsftpd is not set
-CONFIG_PACKAGE_vsftpd-alt=y
-CONFIG_VSFTPD_USE_UCI_SCRIPTS=y
+# CONFIG_PACKAGE_vsftpd-alt is not set
 # CONFIG_PACKAGE_vsftpd-tls is not set
 # CONFIG_PACKAGE_wget-nossl is not set
-# CONFIG_PACKAGE_wget-ssl is not set
+CONFIG_PACKAGE_wget-ssl=y
 # end of File Transfer
 
 #
@@ -5275,9 +5545,7 @@ CONFIG_VSFTPD_USE_UCI_SCRIPTS=y
 # CONFIG_PACKAGE_ebtables is not set
 # CONFIG_PACKAGE_fwknop is not set
 # CONFIG_PACKAGE_fwknopd is not set
-CONFIG_PACKAGE_ip6tables=y
-# CONFIG_PACKAGE_ip6tables-extra is not set
-# CONFIG_PACKAGE_ip6tables-mod-nat is not set
+# CONFIG_PACKAGE_ip6tables is not set
 CONFIG_PACKAGE_iptables=y
 # CONFIG_IPTABLES_CONNLABEL is not set
 # CONFIG_IPTABLES_NFTABLES is not set
@@ -5291,7 +5559,7 @@ CONFIG_PACKAGE_iptables-mod-conntrack-extra=y
 # CONFIG_PACKAGE_iptables-mod-delude is not set
 # CONFIG_PACKAGE_iptables-mod-dhcpmac is not set
 # CONFIG_PACKAGE_iptables-mod-dnetmap is not set
-# CONFIG_PACKAGE_iptables-mod-extra is not set
+CONFIG_PACKAGE_iptables-mod-extra=y
 # CONFIG_PACKAGE_iptables-mod-filter is not set
 CONFIG_PACKAGE_iptables-mod-fullconenat=y
 # CONFIG_PACKAGE_iptables-mod-fuzzy is not set
@@ -5388,9 +5656,9 @@ CONFIG_PACKAGE_miniupnpd=y
 # CONFIG_PACKAGE_bind-tools is not set
 # CONFIG_PACKAGE_chinadns-ng is not set
 CONFIG_PACKAGE_ddns-scripts=y
-# CONFIG_PACKAGE_ddns-scripts_aliyun is not set
+CONFIG_PACKAGE_ddns-scripts_aliyun=y
 # CONFIG_PACKAGE_ddns-scripts_cloudflare.com-v4 is not set
-# CONFIG_PACKAGE_ddns-scripts_dnspod is not set
+CONFIG_PACKAGE_ddns-scripts_dnspod=y
 # CONFIG_PACKAGE_ddns-scripts_freedns_42_pl is not set
 # CONFIG_PACKAGE_ddns-scripts_godaddy.com-v1 is not set
 # CONFIG_PACKAGE_ddns-scripts_no-ip_com is not set
@@ -5624,7 +5892,7 @@ CONFIG_PACKAGE_ip-full=y
 # CONFIG_PACKAGE_lldpd is not set
 # CONFIG_PACKAGE_mcproxy is not set
 # CONFIG_PACKAGE_mrmctl is not set
-# CONFIG_PACKAGE_mwan3 is not set
+CONFIG_PACKAGE_mwan3=y
 # CONFIG_PACKAGE_nstat is not set
 # CONFIG_PACKAGE_olsrd is not set
 # CONFIG_PACKAGE_prince is not set
@@ -5636,8 +5904,8 @@ CONFIG_PACKAGE_ip-full=y
 # CONFIG_PACKAGE_sslh is not set
 # CONFIG_PACKAGE_tc-bpf is not set
 # CONFIG_PACKAGE_tc-full is not set
-CONFIG_PACKAGE_tc-mod-iptables=y
-CONFIG_PACKAGE_tc-tiny=y
+# CONFIG_PACKAGE_tc-mod-iptables is not set
+# CONFIG_PACKAGE_tc-tiny is not set
 # CONFIG_PACKAGE_tcpproxy is not set
 # CONFIG_PACKAGE_udp-broadcast-relay-redux is not set
 # CONFIG_PACKAGE_vis is not set
@@ -5837,7 +6105,7 @@ CONFIG_PACKAGE_wireguard-tools=y
 # CONFIG_PACKAGE_apache is not set
 # CONFIG_PACKAGE_brook is not set
 # CONFIG_BROOK_COMPRESS_GOPROXY is not set
-CONFIG_BROOK_COMPRESS_UPX=y
+# CONFIG_BROOK_COMPRESS_UPX is not set
 # CONFIG_PACKAGE_cgi-io is not set
 # CONFIG_PACKAGE_clamav is not set
 # CONFIG_PACKAGE_cloudflared is not set
@@ -5868,8 +6136,8 @@ CONFIG_PACKAGE_microsocks=y
 # CONFIG_PACKAGE_radicale2 is not set
 # CONFIG_PACKAGE_radicale2-examples is not set
 # CONFIG_PACKAGE_shadowsocks-libev-config is not set
-# CONFIG_PACKAGE_shadowsocks-libev-ss-local is not set
-# CONFIG_PACKAGE_shadowsocks-libev-ss-redir is not set
+CONFIG_PACKAGE_shadowsocks-libev-ss-local=y
+CONFIG_PACKAGE_shadowsocks-libev-ss-redir=y
 # CONFIG_PACKAGE_shadowsocks-libev-ss-rules is not set
 # CONFIG_PACKAGE_shadowsocks-libev-ss-server is not set
 # CONFIG_PACKAGE_shadowsocks-libev-ss-tunnel is not set
@@ -5903,7 +6171,7 @@ CONFIG_PACKAGE_uhttpd-mod-ubus=y
 # CONFIG_PACKAGE_xfrpc is not set
 # CONFIG_PACKAGE_xray-plugin is not set
 # CONFIG_XRAY_PLUGIN_COMPRESS_GOPROXY is not set
-CONFIG_XRAY_PLUGIN_COMPRESS_UPX=y
+# CONFIG_XRAY_PLUGIN_COMPRESS_UPX is not set
 # end of Web Servers/Proxies
 
 #
@@ -5915,9 +6183,20 @@ CONFIG_XRAY_PLUGIN_COMPRESS_UPX=y
 # CONFIG_PACKAGE_hcxdumptool is not set
 # CONFIG_PACKAGE_hcxtools is not set
 # CONFIG_PACKAGE_horst is not set
-# CONFIG_PACKAGE_mt_wifi is not set
+CONFIG_PACKAGE_mt_wifi=y
+
+#
+# MT_WIFI Configuration
+#
+# CONFIG_MTK_CHIP_MT7603E_MT7612E is not set
+CONFIG_MTK_CHIP_MT7603E_MT7615E=y
+# CONFIG_MTK_CHIP_MT7615E_DBDC is not set
+# CONFIG_MTK_CHIP_MT7915E_DBDC is not set
+# end of MT_WIFI Configuration
+
 # CONFIG_PACKAGE_mtk_apcli is not set
 # CONFIG_PACKAGE_mtkiappd is not set
+# CONFIG_PACKAGE_mtkiappd_DUAL_BAND is not set
 # CONFIG_PACKAGE_pixiewps is not set
 # CONFIG_PACKAGE_reaver is not set
 # CONFIG_PACKAGE_wavemon is not set
@@ -5934,18 +6213,14 @@ CONFIG_XRAY_PLUGIN_COMPRESS_UPX=y
 # CONFIG_PACKAGE_hostapd-basic is not set
 # CONFIG_PACKAGE_hostapd-basic-openssl is not set
 # CONFIG_PACKAGE_hostapd-basic-wolfssl is not set
-CONFIG_PACKAGE_hostapd-common=y
+# CONFIG_PACKAGE_hostapd-common is not set
 # CONFIG_PACKAGE_hostapd-mini is not set
 # CONFIG_PACKAGE_hostapd-openssl is not set
-# CONFIG_PACKAGE_hostapd-utils is not set
 # CONFIG_PACKAGE_hostapd-wolfssl is not set
 # CONFIG_PACKAGE_hs20-client is not set
 # CONFIG_PACKAGE_hs20-common is not set
 # CONFIG_PACKAGE_hs20-server is not set
-# CONFIG_PACKAGE_wpa-cli is not set
 # CONFIG_PACKAGE_wpa-supplicant is not set
-# CONFIG_WPA_RFKILL_SUPPORT is not set
-CONFIG_WPA_MSG_MIN_PRIORITY=3
 # CONFIG_WPA_WOLFSSL is not set
 # CONFIG_DRIVER_WEXT_SUPPORT is not set
 CONFIG_DRIVER_11N_SUPPORT=y
@@ -5953,18 +6228,13 @@ CONFIG_DRIVER_11AC_SUPPORT=y
 # CONFIG_DRIVER_11AX_SUPPORT is not set
 # CONFIG_WPA_ENABLE_WEP is not set
 # CONFIG_PACKAGE_wpa-supplicant-basic is not set
-# CONFIG_PACKAGE_wpa-supplicant-mesh-openssl is not set
-# CONFIG_PACKAGE_wpa-supplicant-mesh-wolfssl is not set
 # CONFIG_PACKAGE_wpa-supplicant-mini is not set
 # CONFIG_PACKAGE_wpa-supplicant-openssl is not set
-# CONFIG_PACKAGE_wpa-supplicant-p2p is not set
 # CONFIG_PACKAGE_wpa-supplicant-wolfssl is not set
 # CONFIG_PACKAGE_wpad is not set
 # CONFIG_PACKAGE_wpad-basic is not set
-CONFIG_PACKAGE_wpad-basic-openssl=y
+# CONFIG_PACKAGE_wpad-basic-openssl is not set
 # CONFIG_PACKAGE_wpad-basic-wolfssl is not set
-# CONFIG_PACKAGE_wpad-mesh-openssl is not set
-# CONFIG_PACKAGE_wpad-mesh-wolfssl is not set
 # CONFIG_PACKAGE_wpad-mini is not set
 # CONFIG_PACKAGE_wpad-openssl is not set
 # CONFIG_PACKAGE_wpad-wolfssl is not set
@@ -5987,7 +6257,7 @@ CONFIG_PACKAGE_wpad-basic-openssl=y
 # CONFIG_PACKAGE_acme-dnsapi is not set
 # CONFIG_PACKAGE_acme-notify is not set
 # CONFIG_PACKAGE_adblock is not set
-# CONFIG_PACKAGE_adbyby is not set
+CONFIG_PACKAGE_adbyby=y
 # CONFIG_PACKAGE_addrwatch is not set
 # CONFIG_PACKAGE_adguardhome is not set
 # CONFIG_ADGUARDHOME_COMPRESS_GOPROXY is not set
@@ -6078,7 +6348,7 @@ CONFIG_PACKAGE_ipset=y
 # CONFIG_PACKAGE_iputils-tracepath is not set
 # CONFIG_PACKAGE_ipvsadm is not set
 # CONFIG_PACKAGE_irtt is not set
-CONFIG_PACKAGE_iw=y
+# CONFIG_PACKAGE_iw is not set
 # CONFIG_PACKAGE_iw-full is not set
 # CONFIG_PACKAGE_jool-tools-netfilter is not set
 # CONFIG_PACKAGE_keepalived is not set
@@ -6139,17 +6409,9 @@ CONFIG_PACKAGE_nlbwmon=y
 # CONFIG_NPS_COMPRESS_UPX is not set
 # CONFIG_PACKAGE_nut is not set
 # CONFIG_PACKAGE_obfs4proxy is not set
-CONFIG_PACKAGE_odhcp6c=y
-CONFIG_PACKAGE_odhcp6c_ext_cer_id=0
+# CONFIG_PACKAGE_odhcp6c is not set
 # CONFIG_PACKAGE_odhcpd is not set
-CONFIG_PACKAGE_odhcpd-ipv6only=y
-
-#
-# Configuration
-#
-CONFIG_PACKAGE_odhcpd_ipv6only_ext_cer_id=0
-# end of Configuration
-
+# CONFIG_PACKAGE_odhcpd-ipv6only is not set
 # CONFIG_PACKAGE_ola is not set
 # CONFIG_PACKAGE_omcproxy is not set
 # CONFIG_PACKAGE_onionshare-cli is not set
@@ -6203,8 +6465,15 @@ CONFIG_PACKAGE_ppp-mod-pppoe=y
 # CONFIG_PACKAGE_sctp-tools is not set
 # CONFIG_PACKAGE_ser2net is not set
 # CONFIG_PACKAGE_simple-adblock is not set
-# CONFIG_PACKAGE_simple-obfs is not set
+CONFIG_PACKAGE_simple-obfs=y
 # CONFIG_PACKAGE_simple-obfs-server is not set
+
+#
+# Simple-obfs Compile Configuration
+#
+# CONFIG_SIMPLE_OBFS_STATIC_LINK is not set
+# end of Simple-obfs Compile Configuration
+
 # CONFIG_PACKAGE_slirp4netns is not set
 # CONFIG_PACKAGE_smartdns is not set
 # CONFIG_PACKAGE_smbinfo is not set
@@ -6347,7 +6616,7 @@ CONFIG_PACKAGE_wol=y
 # Boot Loaders
 #
 # CONFIG_PACKAGE_fconfig is not set
-# CONFIG_PACKAGE_uboot-envtools is not set
+CONFIG_PACKAGE_uboot-envtools=y
 # end of Boot Loaders
 
 #
@@ -6958,7 +7227,7 @@ CONFIG_PACKAGE_libjson-script=y
 # CONFIG_PACKAGE_openobex-apps is not set
 # CONFIG_PACKAGE_openocd is not set
 # CONFIG_PACKAGE_opensc-utils is not set
-# CONFIG_PACKAGE_openssl-util is not set
+CONFIG_PACKAGE_openssl-util=y
 # CONFIG_PACKAGE_openzwave is not set
 # CONFIG_PACKAGE_openzwave-config is not set
 # CONFIG_PACKAGE_owipcalc is not set
