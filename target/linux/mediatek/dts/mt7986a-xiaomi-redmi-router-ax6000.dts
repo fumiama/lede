@@ -45,6 +45,10 @@
 	};
 };
 
+&crypto {
+	status = "okay";
+};
+
 &eth {
 	status = "okay";
 
@@ -53,9 +57,8 @@
 		reg = <0>;
 		phy-mode = "2500base-x";
 
-		nvmem-cells = <&macaddr_factory_4>;
+		nvmem-cells = <&macaddr_factory_4 (-1)>;
 		nvmem-cell-names = "mac-address";
-		mac-address-increment = <(-1)>;
 
 		fixed-link {
 			speed = <2500>;
@@ -138,8 +141,8 @@
 		reg = <0>;
 
 		spi-max-frequency = <20000000>;
-		spi-tx-buswidth = <4>;
-		spi-rx-buswidth = <4>;
+		spi-tx-bus-width = <4>;
+		spi-rx-bus-width = <4>;
 
 		mediatek,nmbm;
 		mediatek,bmt-max-ratio = <1>;
@@ -173,12 +176,16 @@
 				reg = <0x180000 0x200000>;
 				read-only;
 
-				compatible = "nvmem-cells";
-				#address-cells = <1>;
-				#size-cells = <1>;
+				nvmem-layout {
+					compatible = "fixed-layout";
+					#address-cells = <1>;
+					#size-cells = <1>;
 
-				macaddr_factory_4: macaddr@4 {
-					reg = <0x4 0x6>;
+					macaddr_factory_4: macaddr@4 {
+						compatible = "mac-base";
+						reg = <0x4 0x6>;
+						#nvmem-cell-cells = <1>;
+					};
 				};
 			};
 
@@ -282,7 +289,19 @@
 	};
 };
 
-&wmac {
+&trng {
+	status = "okay";
+};
+
+&uart0 {
+	status = "okay";
+};
+
+&watchdog {
+	status = "okay";
+};
+
+&wifi {
 	status = "okay";
 	pinctrl-names = "default";
 	pinctrl-0 = <&wf_2g_5g_pins>;

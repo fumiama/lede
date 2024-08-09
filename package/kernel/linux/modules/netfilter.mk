@@ -1,6 +1,6 @@
 
 #
-# Copyright (C) 2006-2010 OpenWrt.org
+# Copyright (C) 2006-2023 OpenWrt.org
 #
 # This is free software, licensed under the GNU General Public License v2.
 # See /LICENSE for more information.
@@ -1149,6 +1149,26 @@ endef
 $(eval $(call KernelPackage,nft-bridge))
 
 
+define KernelPackage/nft-dup-inet
+  SUBMENU:=$(NF_MENU)
+  TITLE:=Netfilter nf_tables dup in ip/ip6/inet family support
+  DEPENDS:=+kmod-nft-core +kmod-nf-conntrack +IPV6:kmod-nf-conntrack6
+  KCONFIG:= \
+	CONFIG_NF_DUP_IPV4 \
+	CONFIG_NF_DUP_IPV6 \
+	CONFIG_NFT_DUP_IPV4 \
+	CONFIG_NFT_DUP_IPV6
+  FILES:= \
+	$(LINUX_DIR)/net/ipv4/netfilter/nf_dup_ipv4.ko \
+	$(LINUX_DIR)/net/ipv6/netfilter/nf_dup_ipv6.ko \
+	$(LINUX_DIR)/net/ipv4/netfilter/nft_dup_ipv4.ko \
+	$(LINUX_DIR)/net/ipv6/netfilter/nft_dup_ipv6.ko
+  AUTOLOAD:=$(call AutoProbe,nf_dup_ipv4 nf_dup_ipv6 nft_dup_ipv4 nft_dup_ipv6)
+endef
+
+$(eval $(call KernelPackage,nft-dup-inet))
+
+
 define KernelPackage/nft-nat
   SUBMENU:=$(NF_MENU)
   TITLE:=Netfilter nf_tables NAT support
@@ -1198,6 +1218,7 @@ define KernelPackage/nft-netdev
   DEPENDS:=+kmod-nft-core
   KCONFIG:= \
 	CONFIG_NETFILTER_INGRESS=y \
+	CONFIG_NETFILTER_EGRESS=y \
 	CONFIG_NF_TABLES_NETDEV \
 	CONFIG_NF_DUP_NETDEV \
 	CONFIG_NFT_DUP_NETDEV \

@@ -17,37 +17,17 @@ Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
  7 files changed, 180 insertions(+), 3 deletions(-)
  create mode 100644 env/nmbm.c
 
---- a/cmd/nvedit.c
-+++ b/cmd/nvedit.c
-@@ -50,6 +50,7 @@ DECLARE_GLOBAL_DATA_PTR;
- 	defined(CONFIG_ENV_IS_IN_EXT4)		|| \
- 	defined(CONFIG_ENV_IS_IN_MTD)		|| \
- 	defined(CONFIG_ENV_IS_IN_NAND)		|| \
-+	defined(CONFIG_ENV_IS_IN_NMBM)		|| \
- 	defined(CONFIG_ENV_IS_IN_NVRAM)		|| \
- 	defined(CONFIG_ENV_IS_IN_ONENAND)	|| \
- 	defined(CONFIG_ENV_IS_IN_SATA)		|| \
-@@ -64,7 +65,7 @@ DECLARE_GLOBAL_DATA_PTR;
- #if	!defined(ENV_IS_IN_DEVICE)		&& \
- 	!defined(CONFIG_ENV_IS_NOWHERE)
- # error Define one of CONFIG_ENV_IS_IN_{EEPROM|FLASH|MMC|FAT|EXT4|MTD|\
--NAND|NVRAM|ONENAND|SATA|SPI_FLASH|REMOTE|UBI} or CONFIG_ENV_IS_NOWHERE
-+NAND|NMBM|NVRAM|ONENAND|SATA|SPI_FLASH|REMOTE|UBI} or CONFIG_ENV_IS_NOWHERE
- #endif
- 
- /*
 --- a/env/Kconfig
 +++ b/env/Kconfig
-@@ -53,7 +53,7 @@ config ENV_IS_NOWHERE
+@@ -59,6 +59,7 @@ config ENV_IS_DEFAULT
+ 	def_bool y if !ENV_IS_IN_EEPROM && !ENV_IS_IN_EXT4 && \
+ 		     !ENV_IS_IN_FAT && !ENV_IS_IN_FLASH && \
  		     !ENV_IS_IN_MMC && !ENV_IS_IN_NAND && \
++		     !ENV_IS_IN_NMBM && \
  		     !ENV_IS_IN_NVRAM && !ENV_IS_IN_ONENAND && \
  		     !ENV_IS_IN_REMOTE && !ENV_IS_IN_SPI_FLASH && \
--		     !ENV_IS_IN_UBI && !ENV_IS_IN_MTD
-+		     !ENV_IS_IN_UBI && !ENV_IS_IN_NMBM && !ENV_IS_IN_MTD
- 	help
- 	  Define this if you don't want to or can't have an environment stored
- 	  on a storage medium. In this case the environment will still exist
-@@ -303,6 +303,21 @@ config ENV_RANGE
+ 		     !ENV_IS_IN_UBI && !ENV_IS_IN_MTD
+@@ -315,6 +316,21 @@ config ENV_RANGE
  	  Specifying a range with more erase blocks than are needed to hold
  	  CONFIG_ENV_SIZE allows bad blocks within the range to be avoided.
  
@@ -69,7 +49,7 @@ Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
  config ENV_IS_IN_NVRAM
  	bool "Environment in a non-volatile RAM"
  	depends on !CHAIN_OF_TRUST
-@@ -579,7 +594,7 @@ config ENV_MTD_NAME
+@@ -591,7 +607,7 @@ config ENV_MTD_NAME
  config ENV_OFFSET
  	hex "Environment offset"
  	depends on ENV_IS_IN_EEPROM || ENV_IS_IN_MMC || ENV_IS_IN_NAND || \
@@ -80,7 +60,7 @@ Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
  	default 0xF0000 if ARCH_SUNXI
 --- a/env/Makefile
 +++ b/env/Makefile
-@@ -28,6 +28,7 @@ obj-$(CONFIG_$(SPL_TPL_)ENV_IS_IN_FAT) +
+@@ -26,6 +26,7 @@ obj-$(CONFIG_$(SPL_TPL_)ENV_IS_IN_FAT) +
  obj-$(CONFIG_$(SPL_TPL_)ENV_IS_IN_EXT4) += ext4.o
  obj-$(CONFIG_$(SPL_TPL_)ENV_IS_IN_MTD) += mtd.o
  obj-$(CONFIG_$(SPL_TPL_)ENV_IS_IN_NAND) += nand.o
@@ -90,7 +70,7 @@ Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
  
 --- a/env/env.c
 +++ b/env/env.c
-@@ -75,6 +75,9 @@ static enum env_location env_locations[]
+@@ -52,6 +52,9 @@ static enum env_location env_locations[]
  #ifdef CONFIG_ENV_IS_IN_NAND
  	ENVL_NAND,
  #endif
@@ -260,7 +240,7 @@ Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
 +};
 --- a/include/env_internal.h
 +++ b/include/env_internal.h
-@@ -132,6 +132,7 @@ enum env_location {
+@@ -111,6 +111,7 @@ enum env_location {
  	ENVL_MMC,
  	ENVL_MTD,
  	ENVL_NAND,
@@ -270,11 +250,11 @@ Signed-off-by: Weijie Gao <weijie.gao@mediatek.com>
  	ENVL_REMOTE,
 --- a/tools/Makefile
 +++ b/tools/Makefile
-@@ -42,6 +42,7 @@ ENVCRC-$(CONFIG_ENV_IS_IN_FLASH) = y
+@@ -39,6 +39,7 @@ ENVCRC-$(CONFIG_ENV_IS_IN_FLASH) = y
  ENVCRC-$(CONFIG_ENV_IS_IN_ONENAND) = y
  ENVCRC-$(CONFIG_ENV_IS_IN_MTD) = y
  ENVCRC-$(CONFIG_ENV_IS_IN_NAND) = y
 +ENVCRC-$(CONFIG_ENV_IS_IN_NMBM) = y
  ENVCRC-$(CONFIG_ENV_IS_IN_NVRAM) = y
  ENVCRC-$(CONFIG_ENV_IS_IN_SPI_FLASH) = y
- CONFIG_BUILD_ENVCRC ?= $(ENVCRC-y)
+ BUILD_ENVCRC ?= $(ENVCRC-y)

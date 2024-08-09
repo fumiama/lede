@@ -24,7 +24,7 @@ endef
 define Package/autocore-x86
   TITLE:=x86/x64 auto core loadbalance script.
   MAINTAINER:=Lean
-  DEPENDS:=@TARGET_x86 +bc +lm-sensors +ethtool
+  DEPENDS:=@TARGET_x86 +bc +lm-sensors +ethtool +pciutils
   VARIANT:=x86
 endef
 
@@ -47,6 +47,7 @@ define Package/autocore-arm/install
 	$(INSTALL_DIR) $(1)/sbin
 	$(INSTALL_BIN) ./files/arm/sbin/cpuinfo $(1)/sbin/cpuinfo
 	$(INSTALL_BIN) ./files/arm/sbin/ethinfo $(1)/sbin/ethinfo
+	$(INSTALL_BIN) ./files/arm/sbin/usage $(1)/sbin/usage
 endef
 
 define Package/autocore-x86/install
