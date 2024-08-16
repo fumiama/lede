@@ -10,9 +10,7 @@
 name: wndr4300_v1_128m
 
 on:
-  push:
-    branches: 
-      - main
+  workflow_dispatch:
   # schedule:
   #   - cron: 0 20 * * *
   release:

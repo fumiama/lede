@@ -10,9 +10,7 @@
 name: phicomm_k2
 
 on:
-  push:
-    branches: 
-      - main
+  workflow_dispatch:
   # schedule:
   #   - cron: 0 20 * * *
   release:
