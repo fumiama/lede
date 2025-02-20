@@ -40,7 +40,7 @@ define Package/base-files
   SECTION:=base
   CATEGORY:=Base system
   DEPENDS:=+netifd +libc +jsonfilter +SIGNED_PACKAGES:usign +SIGNED_PACKAGES:openwrt-keyring +NAND_SUPPORT:ubi-utils +fstools +fwtool
-  TITLE:=Base filesystem for OpenWrt
+  TITLE:=Base filesystem for LEDE
   URL:=http://openwrt.org/
   VERSION:=$(PKG_RELEASE)-$(REVISION)
 endef
@@ -49,7 +49,6 @@ define Package/base-files/conffiles
 /etc/config/
 /etc/config/network
 /etc/config/system
-/etc/crontabs/
 /etc/dropbear/
 /etc/ethers
 /etc/group
@@ -239,6 +238,10 @@ endif
 
 	$(if $(CONFIG_TARGET_PREINIT_DISABLE_FAILSAFE), \
 		rm -f $(1)/etc/banner.failsafe,)
+		
+	if [ -f $(TOPDIR)/feeds/luci/package.json ]; then \
+		$(CP) ./luci2/* $(1)/; \
+	fi
 endef
 
 ifneq ($(DUMP),1)

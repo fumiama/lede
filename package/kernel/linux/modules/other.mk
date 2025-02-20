@@ -762,6 +762,7 @@ define KernelPackage/mtdtests
   TITLE:=MTD subsystem tests
   KCONFIG:=CONFIG_MTD_TESTS
   FILES:=\
+	$(LINUX_DIR)/drivers/mtd/tests/mtd_nandbiterrs.ko \
 	$(LINUX_DIR)/drivers/mtd/tests/mtd_nandecctest.ko \
 	$(LINUX_DIR)/drivers/mtd/tests/mtd_oobtest.ko \
 	$(LINUX_DIR)/drivers/mtd/tests/mtd_pagetest.ko \
@@ -769,6 +770,7 @@ define KernelPackage/mtdtests
 	$(LINUX_DIR)/drivers/mtd/tests/mtd_speedtest.ko \
 	$(LINUX_DIR)/drivers/mtd/tests/mtd_stresstest.ko \
 	$(LINUX_DIR)/drivers/mtd/tests/mtd_subpagetest.ko \
+	$(LINUX_DIR)/drivers/mtd/tests/mtd_test.ko \
 	$(LINUX_DIR)/drivers/mtd/tests/mtd_torturetest.ko
 endef
 
@@ -1214,9 +1216,10 @@ define KernelPackage/tpm
   SUBMENU:=$(OTHER_MENU)
   TITLE:=TPM Hardware Support
   DEPENDS:= +kmod-random-core +kmod-asn1-decoder \
-	  +kmod-asn1-encoder +kmod-oid-registry
+	  +kmod-asn1-encoder +kmod-oid-registry +LINUX_6_12:kmod-crypto-ecdh +LINUX_6_12:kmod-crypto-sha256
   KCONFIG:= CONFIG_TCG_TPM
-  FILES:= $(LINUX_DIR)/drivers/char/tpm/tpm.ko
+  FILES:= $(LINUX_DIR)/lib/crypto/libaescfb.ko@ge6.9 \
+  $(LINUX_DIR)/drivers/char/tpm/tpm.ko
   AUTOLOAD:=$(call AutoLoad,10,tpm,1)
 endef
 
@@ -1315,7 +1318,7 @@ $(eval $(call KernelPackage,itco-wdt))
 define KernelPackage/mhi-bus
   SUBMENU:=$(OTHER_MENU)
   TITLE:=MHI bus
-  DEPENDS:=@(LINUX_5_15||LINUX_6_1||LINUX_6_6)
+  DEPENDS:=@(LINUX_5_15||LINUX_6_1||LINUX_6_6||LINUX_6_12)
   KCONFIG:=CONFIG_MHI_BUS \
            CONFIG_MHI_BUS_DEBUG=y
   FILES:=$(LINUX_DIR)/drivers/bus/mhi/host/mhi.ko

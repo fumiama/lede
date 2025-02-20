@@ -101,6 +101,9 @@ ifeq ($(CONFIG_TARGET_SUBTARGET), "ipq807x")
 else ifeq ($(CONFIG_TARGET_SUBTARGET), "ipq60xx")
     SOC="ipq60xx_64"
 	subtarget:=$(CONFIG_TARGET_SUBTARGET)
+else ifeq ($(CONFIG_TARGET_SUBTARGET), "ipq50xx")
+    SOC="ipq50xx_64"
+	subtarget:=$(CONFIG_TARGET_SUBTARGET)
 endif
 
 define Build/InstallDev
@@ -117,6 +120,7 @@ EXTRA_CFLAGS+= -I$(STAGING_DIR)/usr/include/qca-nss-gmac \
 			   -I$(STAGING_DIR)/usr/include/qca-nss-dp \
 			   -I$(STAGING_DIR)/usr/include/qca-ssdk \
 			   -Wno-unused-variable \
+			   -Wno-error=enum-conversion \
 			   -Wno-error=unused-function
 
 ifeq ($(BOARD),qualcommax)

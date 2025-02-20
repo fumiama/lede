@@ -230,7 +230,7 @@ $(eval $(call KernelPackage,crypto-ecdh))
 
 define KernelPackage/crypto-echainiv
   TITLE:=Encrypted Chain IV Generator
-  DEPENDS:=+kmod-crypto-aead +LINUX_6_6:kmod-crypto-geniv
+  DEPENDS:=+kmod-crypto-aead +(LINUX_6_6||LINUX_6_12):kmod-crypto-geniv
   KCONFIG:=CONFIG_CRYPTO_ECHAINIV
   FILES:=$(LINUX_DIR)/crypto/echainiv.ko
   AUTOLOAD:=$(call AutoLoad,09,echainiv)
@@ -347,6 +347,26 @@ define KernelPackage/crypto-hmac
 endef
 
 $(eval $(call KernelPackage,crypto-hmac))
+
+
+define KernelPackage/crypto-hw-atmel
+  TITLE:=Microchip / Atmel ECC/SHA/RNG hw accelerator
+  DEPENDS:=+kmod-i2c-core +kmod-crypto-ecdh +kmod-crypto-sha1 \
+	+kmod-crypto-sha256 +kmod-lib-crc16 +kmod-random-core
+  KCONFIG:= \
+	CONFIG_CRYPTO_HW=y \
+	CONFIG_CRYPTO_DEV_ATMEL_I2C \
+	CONFIG_CRYPTO_DEV_ATMEL_ECC \
+	CONFIG_CRYPTO_DEV_ATMEL_SHA204A
+  FILES:= \
+	$(LINUX_DIR)/drivers/crypto/atmel-i2c.ko \
+	$(LINUX_DIR)/drivers/crypto/atmel-ecc.ko \
+	$(LINUX_DIR)/drivers/crypto/atmel-sha204a.ko
+  AUTOLOAD:=$(call AutoLoad,09,atmel-i2c atmel-ecc atmel-sha204a)
+  $(call AddDepends/crypto)
+endef
+
+$(eval $(call KernelPackage,crypto-hw-atmel))
 
 
 define KernelPackage/crypto-hw-ccp
@@ -852,8 +872,8 @@ define KernelPackage/crypto-rng
   TITLE:=CryptoAPI random number generation
   DEPENDS:=+kmod-crypto-hash +kmod-crypto-hmac \
 	   +(LINUX_5_4||LINUX_5_10):kmod-crypto-sha256 \
-	   +(LINUX_5_15||LINUX_6_1||LINUX_6_6):kmod-crypto-sha512 \
-	   +(LINUX_6_1||LINUX_6_6):kmod-crypto-sha3
+	   +(LINUX_5_15||LINUX_6_1||LINUX_6_6||LINUX_6_12):kmod-crypto-sha512 \
+	   +(LINUX_6_1||LINUX_6_6||LINUX_6_12):kmod-crypto-sha3
   KCONFIG:= \
 	CONFIG_CRYPTO_DRBG \
 	CONFIG_CRYPTO_DRBG_HMAC=y \
@@ -875,7 +895,7 @@ $(eval $(call KernelPackage,crypto-rng))
 define KernelPackage/crypto-geniv
   TITLE:=CryptoAPI Shared IV generator
   HIDDEN:=1
-  DEPENDS:=+kmod-crypto-rng +kmod-crypto-aead @LINUX_6_6
+  DEPENDS:=+kmod-crypto-rng +kmod-crypto-aead @(LINUX_6_6||LINUX_6_12)
   KCONFIG:=CONFIG_CRYPTO_GENIV
   FILES:=$(LINUX_DIR)/crypto/geniv.ko
   AUTOLOAD:=$(call AutoLoad,09,geniv)
@@ -887,7 +907,7 @@ $(eval $(call KernelPackage,crypto-geniv))
 
 define KernelPackage/crypto-seqiv
   TITLE:=CryptoAPI Sequence Number IV Generator
-  DEPENDS:=+kmod-crypto-aead +kmod-crypto-rng +LINUX_6_6:kmod-crypto-geniv
+  DEPENDS:=+kmod-crypto-aead +kmod-crypto-rng +(LINUX_6_6||LINUX_6_12):kmod-crypto-geniv
   KCONFIG:=CONFIG_CRYPTO_SEQIV
   FILES:=$(LINUX_DIR)/crypto/seqiv.ko
   AUTOLOAD:=$(call AutoLoad,09,seqiv)
@@ -1102,7 +1122,7 @@ $(eval $(call KernelPackage,crypto-test))
 
 define KernelPackage/crypto-user
   TITLE:=CryptoAPI userspace interface
-  DEPENDS:=+kmod-crypto-hash +kmod-crypto-manager +LINUX_6_6:kmod-crypto-rng
+  DEPENDS:=+kmod-crypto-hash +kmod-crypto-manager +(LINUX_6_6||LINUX_6_12):kmod-crypto-rng
   KCONFIG:= \
 	CONFIG_CRYPTO_USER \
 	CONFIG_CRYPTO_USER_API \

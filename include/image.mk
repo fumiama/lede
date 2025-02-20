@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-2.0-only
 #
-# Copyright (C) 2006-2020 OpenWrt.org
+# Copyright (C) 2006-2020 LEDE.org
 
 override TARGET_BUILD=
 include $(INCLUDE_DIR)/prereq.mk
@@ -502,6 +502,9 @@ define Device/Build/initramfs
 
   $(KDIR)/$$(KERNEL_INITRAMFS_NAME):: image_prepare
   $(1)-images: $$(if $$(KERNEL_INITRAMFS),$(BIN_DIR)/$$(KERNEL_INITRAMFS_IMAGE))
+  
+  .IGNORE: $(BIN_DIR)/$$(KERNEL_INITRAMFS_IMAGE)
+  
   $(BIN_DIR)/$$(KERNEL_INITRAMFS_IMAGE): $(KDIR)/tmp/$$(KERNEL_INITRAMFS_IMAGE)
 	cp $$^ $$@
 
