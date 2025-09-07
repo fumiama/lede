@@ -9,10 +9,10 @@ PKG_NAME:=aic8800
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_DATE:=2024-06-20
+PKG_SOURCE_DATE:=2025-07-02
 PKG_SOURCE_URL:=https://github.com/radxa-pkg/aic8800.git
-PKG_SOURCE_VERSION:=8ad987876a6220fffb40a755e0454250ce2c5fdd
-PKG_MIRROR_HASH:=4a22e28a4341eb7516f03ea7e6c1c0523013e1aaf72c17428eb3749c8f553856
+PKG_SOURCE_VERSION:=4e9cd23d44c7fedb845bbeaaa53675e90aed57e7
+PKG_MIRROR_HASH:=a09cb200d2af8790f5ce67c81ed93e03be364bc89d3a6fd7b3fd5a93f23fd141
 
 ifeq ($(BUILD_VARIANT),sdio)
 MAKE_PATH:=src/SDIO/driver_fw/driver/aic8800
@@ -31,12 +31,11 @@ define KernelPackage/aic8800s
   SUBMENU:=Wireless Drivers
   TITLE:=AIC8800 SDIO wireless support
   DEPENDS:=+kmod-mac80211 +kmod-mmc \
-	+@DRIVER_11N_SUPPORT +@DRIVER_11AC_SUPPORT
+	+@DRIVER_11AC_SUPPORT +@DRIVER_11AX_SUPPORT
   FILES:= \
 	$(PKG_BUILD_DIR)/$(MAKE_PATH)/aic8800_bsp/aic8800_bsp.ko \
 	$(PKG_BUILD_DIR)/$(MAKE_PATH)/aic8800_fdrv/aic8800_fdrv.ko
   AUTOLOAD:=$(call AutoProbe,aic8800_bsp aic8800_fdrv)
-  MODPARAMS.aic8800_fdrv:=he_on=n
   VARIANT:=sdio
 endef
 
@@ -44,13 +43,11 @@ define KernelPackage/aic8800u
   SUBMENU:=Wireless Drivers
   TITLE:=AIC8800 USB wireless support
   DEPENDS:=+kmod-mac80211 +kmod-usb-core @USB_SUPPORT \
-	+@DRIVER_11N_SUPPORT +@DRIVER_11AC_SUPPORT
+	+@DRIVER_11AC_SUPPORT +@DRIVER_11AX_SUPPORT
   FILES:= \
 	$(PKG_BUILD_DIR)/$(MAKE_PATH)/aic_load_fw/aic_load_fw.ko \
-	$(PKG_BUILD_DIR)/$(MAKE_PATH)/aic8800_fdrv/aic8800_fdrv.ko
-  AUTOLOAD:=$(call AutoProbe,aic_load_fw aic8800_fdrv)
-  MODPARAMS.aic8800_fdrv:=he_on=n
-  CONFLICTS:=kmod-aic8800s
+	$(PKG_BUILD_DIR)/$(MAKE_PATH)/aic8800_fdrv/aic8800_usb.ko
+  AUTOLOAD:=$(call AutoProbe,aic_load_fw aic8800_usb)
   VARIANT:=usb
 endef
 

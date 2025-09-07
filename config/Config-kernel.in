@@ -609,6 +609,13 @@ choice
 		bool "madvise"
 endchoice
 
+config KERNEL_ARM64_CONTPTE
+	bool "Compile the kernel with Contiguous PTE mappings for user memory"
+	depends on KERNEL_ARM64
+	depends on KERNEL_TRANSPARENT_HUGEPAGE
+	depends on LINUX_6_12
+	default y
+
 config KERNEL_HUGETLBFS
 	bool
 
@@ -1305,6 +1312,23 @@ config KERNEL_BTRFS_FS
 	  Say Y here if you want to make the kernel to be able to boot off a
 	  BTRFS partition.
 
+config KERNEL_EROFS_FS
+	bool "Compile the kernel with built-in EROFS support"
+	help
+	  Say Y here if you want to make the kernel to be able to boot off a
+	  EROFS partition.
+
+config KERNEL_EROFS_FS_XATTR
+	bool "EROFS XATTR support"
+
+config KERNEL_EROFS_FS_ZIP
+	bool
+	default y if KERNEL_EROFS_FS
+
+config KERNEL_EROFS_FS_ZIP_LZMA
+	bool
+	default y if KERNEL_EROFS_FS
+
 menu "Filesystem ACL and attr support options"
 	config USE_FS_ACL_ATTR
 		bool "Use filesystem ACL and attr support by default"
@@ -1322,6 +1346,11 @@ menu "Filesystem ACL and attr support options"
 
 	config KERNEL_BTRFS_FS_POSIX_ACL
 		bool "Enable POSIX ACL for BtrFS Filesystems"
+		select KERNEL_FS_POSIX_ACL
+		default y if USE_FS_ACL_ATTR
+
+	config KERNEL_EROFS_FS_POSIX_ACL
+		bool "Enable POSIX ACL for EROFS Filesystems"
 		select KERNEL_FS_POSIX_ACL
 		default y if USE_FS_ACL_ATTR
 
@@ -1477,6 +1506,11 @@ config KERNEL_LSM
 	string
 	default "lockdown,yama,loadpin,safesetid,integrity,selinux"
 	depends on KERNEL_SECURITY_SELINUX
+
+config KERNEL_EROFS_FS_SECURITY
+	bool "EROFS Security Labels"
+	default y if !SMALL_FLASH
+	select KERNEL_EROFS_FS_XATTR
 
 config KERNEL_EXT4_FS_SECURITY
 	bool "Ext4 Security Labels"

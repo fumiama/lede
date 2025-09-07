@@ -1,12 +1,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=r8126
-PKG_VERSION:=10.014.01
+PKG_VERSION:=10.015.00
 PKG_RELEASE:=1
 
 PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 PKG_SOURCE_URL:=https://github.com/openwrt/rtl8126/releases/download/$(PKG_VERSION)
-PKG_HASH:=dbb10a7abd0972e4abd1b89ea4eb22fc55d6c1dc2f711b5acf4a3bc376275e21
+PKG_HASH:=fac513aa925264a95b053e7532fcda56022d29db288f6625fafee2759a8a6124
 
 PKG_BUILD_PARALLEL:=1
 PKG_LICENSE:=GPLv2
@@ -20,7 +20,7 @@ define KernelPackage/r8126
   TITLE:=Realtek RTL8126 PCI 5 Gigabit Ethernet driver
   DEPENDS:=@PCI_SUPPORT +kmod-libphy
   FILES:=$(PKG_BUILD_DIR)/src/r8126.ko
-  AUTOLOAD:=$(call AutoProbe,r8126)
+  AUTOLOAD:=$(call AutoProbe,r8126,1)
   PROVIDES:=kmod-r8169
   VARIANT:=regular
 endef

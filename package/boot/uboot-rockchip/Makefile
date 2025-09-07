@@ -5,10 +5,10 @@
 include $(TOPDIR)/rules.mk
 include $(INCLUDE_DIR)/kernel.mk
 
-PKG_VERSION:=2025.01
+PKG_VERSION:=2025.07
 PKG_RELEASE:=1
 
-PKG_HASH:=cdef7d507c93f1bbd9f015ea9bc21fa074268481405501945abc6f854d5b686f
+PKG_HASH:=0f933f6c5a426895bf306e93e6ac53c60870e4b54cda56d95211bec99e63bec7
 
 PKG_MAINTAINER:=Tobias Maedel <openwrt@tbspace.de>
 
@@ -183,6 +183,36 @@ define U-Boot/sv901-eaio-rk3399
   USE_RKBIN:=1
 endef
 
+# RK3528 boards
+
+define U-Boot/rk3528/Default
+  BUILD_SUBTARGET:=armv8
+  DEPENDS:=+PACKAGE_u-boot-$(1):rkbin-rk3528
+  ATF:=rk3528_bl31_v1.17.elf
+  TPL:=rk3528_ddr_1056MHz_v1.10.bin
+endef
+
+define U-Boot/generic-rk3528
+  $(U-Boot/rk3528/Default)
+  NAME:=GENERIC RK3528
+  BUILD_DEVICES:= \
+    armsom_sige1 \
+    hinlink_opc-h28k \
+    hinlink_opc-h29k \
+    hinlink_opc-ht2 \
+    widora_mangopi-m28c \
+    widora_mangopi-m28k \
+    widora_mangopi-m28k-pro
+endef
+
+define U-Boot/radxa-e20c-rk3528
+  $(U-Boot/rk3528/Default)
+  NAME:=Radxa E20C
+  BUILD_DEVICES:= \
+    radxa_e20c \
+    radxa_e24c
+endef
+
 # RK3566 boards
 
 define U-Boot/rk3566/Default
@@ -255,6 +285,7 @@ define U-Boot/generic-rk3568
     hinlink_opc-h68k \
     hinlink_opc-h69k \
     lyt_t68m \
+    nlnet_xiguapi-v3 \
     seewo_sv21
 endef
 
@@ -327,7 +358,8 @@ define U-Boot/generic-rk3588
   $(U-Boot/rk3588/Default)
   NAME:=Generic RK3588
   BUILD_DEVICES:= \
-    hinlink_owl-h88k \
+    radxa_e52c \
+    radxa_e54c \
     seewo_srcm3588-io \
     seewo_srcm3588-sw
 endef
@@ -343,7 +375,16 @@ define U-Boot/orangepi-5-plus-rk3588
   $(U-Boot/rk3588/Default)
   NAME:=OrangePi 5 Plus
   BUILD_DEVICES:= \
-    xunlong_orangepi-5-plus
+    xunlong_orangepi-5-max \
+    xunlong_orangepi-5-plus \
+    xunlong_orangepi-5-ultra
+endef
+
+define U-Boot/rock5b-rk3588
+  $(U-Boot/rk3588/Default)
+  NAME:=ROCK 5B
+  BUILD_DEVICES:= \
+    radxa_rock-5b
 endef
 
 define U-Boot/sige7-rk3588
@@ -384,6 +425,8 @@ define U-Boot/rock5a-rk3588s
 endef
 
 UBOOT_TARGETS := \
+  generic-rk3528 \
+  radxa-e20c-rk3528 \
   nanopi-r3s-rk3566 \
   panther-x2-rk3566 \
   rock-3c-rk3566 \
@@ -402,6 +445,7 @@ UBOOT_TARGETS := \
   generic-rk3588 \
   nanopc-t6-rk3588 \
   orangepi-5-plus-rk3588 \
+  rock5b-rk3588 \
   sige7-rk3588 \
   nanopi-r6c-rk3588s \
   nanopi-r6s-rk3588s \

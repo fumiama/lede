@@ -30,13 +30,7 @@ define U-Boot/evb-rk3528
   BUILD_SUBTARGET:=armv8
   NAME:=RK3528 Evaluation
   BUILD_DEVICES:= \
-    armsom_sige1 \
-    hinlink_opc-h28k \
-    hinlink_opc-h29k \
-    hinlink_opc-ht2 \
-    radxa_e20c \
-    widora_mangopi-m28k \
-    widora_mangopi-m28k-pro
+    armsom_sige1
   DEPENDS:=+PACKAGE_u-boot-evb-rk3528:rkbin-rk3528
   ATF:=rk3528_bl31_v1.17.elf
   DDR:=rk3528_ddr_1056MHz_v1.10.bin
@@ -48,7 +42,10 @@ define U-Boot/evb-rk3576
   BUILD_SUBTARGET:=armv8
   NAME:=RK3576 Evaluation
   BUILD_DEVICES:= \
-    armsom_sige5
+    armsom_sige5 \
+    ariaboard_photonicat2 \
+    friendlyarm_nanopi-m5 \
+    friendlyarm_nanopi-r76s
   DEPENDS:=+PACKAGE_u-boot-evb-rk3576:rkbin-rk3576
   ATF:=rk3576_bl31_v1.12.elf
   DDR:=rk3576_ddr_lp4_2112MHz_lp5_2736MHz_v1.08.bin
