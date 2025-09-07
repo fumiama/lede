@@ -69,6 +69,8 @@ jobs:
           git clone --depth=1 https://github.com/fumiama/opackages.git ./package/fumiama
           git clone --depth=1 https://github.com/fumiama/openwrt-upx.git ./package/fumiama/upx
           git clone --depth=1 https://github.com/fumiama/luci-theme-rosy.git ./package/fumiama/luci-theme-rosy
+          git clone --depth=1 https://github.com/fumiama/openwrt-fakehttp.git ./package/openwrt-packages/fumiama/openwrt-fakehttp
+          git clone --depth=1 https://github.com/fumiama/luci-app-fakehttp.git ./package/openwrt-packages/fumiama/luci-app-fakehttp
 
       - name: Update feeds
         run: |
